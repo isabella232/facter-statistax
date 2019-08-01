@@ -21,7 +21,7 @@ module FacterStatistax
         private
 
         def verify_file
-          raise(_('Please define config file!')) unless ::File.exist?(CONFIG_FILE)
+          raise('Please define config file!') unless ::File.exist?(CONFIG_FILE)
         end
 
         def run_executor(run)
