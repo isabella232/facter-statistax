@@ -1,4 +1,6 @@
 # facter-statistax
+[![Build Status](https://travis-ci.com/puppetlabs/facter-statistax.svg?branch=master)](https://travis-ci.com/puppetlabs/facter-statistax)
+
 Benchmark tool for different versions of Puppet Facter.
 
 In order to run this script you must create a 'config.json' file with the following format:
