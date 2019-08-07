@@ -17,13 +17,13 @@ module FacterStatistax
       def write
         test_run = @test_run.merge(facts: facts)
         output << test_run
-        ::File.open(LOG_DIR.join('output.json'), 'w') do |file|
+        ::File.open(File.join(LOG_DIR, 'output.json'), 'w') do |file|
           file.write(output.to_json)
         end
       end
 
       def write_test_suite(facter_version, test_run_name)
-        @test_run = @test_run.merge(test_run_name: test_run_name, facter_version: facter_version)
+        @test_run = @test_run.merge(test_run_name: test_run_name, facter_gem?: facter_version)
       end
 
       def write_run(fact_name, time)

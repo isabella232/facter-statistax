@@ -25,10 +25,8 @@ In order to run this script you must create a 'config.json' file with the follow
 ]
 ```
 
-After you create the config file, run: 'ruby /bin/statistax.rb'.
+After you create the config file, run: ```statistax path_to_config_file (true)```.
 
-statistax.rb can receive as parameter a path to facter binary:
-
-'ruby /bin/statistax.rb path' -> 'ruby /bin/statistax.rb /opt/puppetlabs/bin/facter' 
+statistax.rb can receive true or false. True means that you want to measure facter gem, false is for c++ facter (the 3rd parameter is by default "false"). 
 
 You will find all the output from all runs in log/facter_statistax.log.

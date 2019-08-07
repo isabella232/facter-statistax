@@ -11,13 +11,10 @@ module FacterStatistax
       attr_reader :fact, :repetitions
 
       def execute
-        fact.clear if fact == 'all'
         sum = sum_for_each_repetition do
-          time = Benchmark.measure do
-            _stdout, _status = Open3.capture2(FACTER_BIN_PATH, fact)
-          end
+          time, _status = Open3.capture2("ruby \"#{SCRIPTS_DIR}/benchmark_script.rb\" #{IS_GEM} #{fact}")
           log_time(fact, time)
-          time
+          time.to_f
         end
         Common::OutputWriter.instance.write_run(fact, sum / repetitions)
       end
@@ -28,14 +25,14 @@ module FacterStatistax
         sum = 0
         repetitions.times do
           time = yield
-          sum += time.real
+          sum += time
         end
         sum
       end
 
       def log_time(fact, time)
         FacterStatistax.logger.info("For #{fact} facts it took:")
-        FacterStatistax.logger.info("#{format('%.2f', time.real)}s")
+        FacterStatistax.logger.info("#{format('%.2f', time)}s")
       end
     end
   end

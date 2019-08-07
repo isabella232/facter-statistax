@@ -7,12 +7,11 @@ module FacterStatistax
     module Executor
       class << self
         def execute
-          facter_version = Common::VersionDiscovery.facter_version?
           json_writer = Common::OutputWriter.instance
 
           read_config_file.each do |test_suite|
-            json_writer.write_test_suite(facter_version, test_suite.test_run)
-            log_information(facter_version, test_suite.test_run)
+            json_writer.write_test_suite(IS_GEM, test_suite.test_run)
+            log_information(IS_GEM, test_suite.test_run)
             test_suite.runs.each do |run|
               run_executor(run)
             end
@@ -30,7 +29,7 @@ module FacterStatistax
 
         def log_information(facter_version, suite_name)
           logger.info("Begin test run: #{suite_name}")
-          logger.info("Facter version: #{facter_version}")
+          logger.info("Facter gem? #{facter_version}")
         end
 
         def run_executor(run)
