@@ -9,9 +9,9 @@ module FacterStatistax
     stdout_logger = Logger.new(STDOUT)
     stdout_logger.level = Logger::DEBUG
 
-    file_logger = Logger.new(::File.open(LOG_DIR.join('statistax.log'), 'a'))
-    file_logger.level = Logger::DEBUG
+    @file_logger ||= Logger.new(::File.open(LOG_DIR.join('statistax.log'), 'a'))
+    @file_logger.level = Logger::DEBUG
 
-    @logger = Common::MultiLogger.new(file_logger, stdout_logger)
+    @logger = Common::MultiLogger.new(@file_logger, stdout_logger)
   end
 end

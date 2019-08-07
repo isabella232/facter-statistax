@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# frozen_tring_literal: true
-
 module FacterStatistax
   module Executors
     class TestRunExecutor
@@ -14,12 +12,25 @@ module FacterStatistax
 
       def execute
         fact.clear if fact == 'all'
-        repetitions.times do
+        sum = sum_for_each_repetition do
           time = Benchmark.measure do
-            system("#{FACTER_BIN_PATH} #{fact} > /dev/null")
+            _stdout, _status = Open3.capture2(FACTER_BIN_PATH, fact)
           end
           log_time(fact, time)
+          time
         end
+        Common::OutputWriter.instance.write_run(fact, sum / repetitions)
+      end
+
+      private
+
+      def sum_for_each_repetition
+        sum = 0
+        repetitions.times do
+          time = yield
+          sum += time.real
+        end
+        sum
       end
 
       def log_time(fact, time)

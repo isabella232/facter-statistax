@@ -18,6 +18,6 @@ def load_files(*dirs)
 end
 
 load_files(
-  'lib/common/*.rb',
-  'lib/executors/*.rb'
+    'lib/common/*.rb',
+    'lib/executors/*.rb'
 )
