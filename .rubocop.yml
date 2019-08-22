@@ -1,9 +1,13 @@
 AllCops:
   Include:
     - 'lib/**/*.rb'
+    - 'acceptance/**/*.rb'
+    - 'bin/*.rb'
+    - 'config/*.rb'
+    - 'scripts/*.rb'
 
 Documentation:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 120
+  Max: 150
