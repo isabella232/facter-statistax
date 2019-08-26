@@ -10,7 +10,7 @@ require_relative '../lib/logger'
 ROOT_DIR      = Pathname.new(File.expand_path('..', __dir__)) unless defined?(ROOT_DIR)
 LOG_DIR       = File.join(Dir.getwd, 'log')
 SCRIPTS_DIR   = ROOT_DIR.join('scripts')
-CONFIG_FILE   = ARGV[0] || ""
+CONFIG_FILE   = ARGV[0] || ''
 IS_GEM        = ARGV[1] || 'false'
 
 def load_files(*dirs)
@@ -18,6 +18,6 @@ def load_files(*dirs)
 end
 
 load_files(
-    'lib/common/*.rb',
-    'lib/executors/*.rb'
+  'lib/common/*.rb',
+  'lib/executors/*.rb'
 )

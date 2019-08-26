@@ -2,3 +2,4 @@ paths: # Files to analyse.
   - 'lib'
   - 'bin'
   - 'config'
+  - 'scripts'
