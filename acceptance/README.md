@@ -13,7 +13,7 @@ facter will be tested)
 ```beaker init -h hosts.yaml --options-file config/aio/options.rb```\
    To test using nspooler you have to require the vm from nspooler first, then:\
 ```beaker-hostgenerator centos6-64a-solaris11-SPARC\{hypervisor=none\,hostname=$THE_HOST_NSPOOLER_PROVIDED\} > hosts.yaml```\
-```bundle exec beaker init --h hosts.yaml --options-file config/aio/options.rb```
+```bundle exec beaker init --hosts hosts.yaml --options-file config/aio/options.rb```
 7. ```bundle exec beaker provision```
 8. ```bundle exec beaker exec pre-suite --pre-suite presuite/01_install_puppet_agent.rb,presuite/02_install_facter_statistax.rb,presuite/03_install_facter_gem.rb --preserve-state```
 9.  Before this step you can set/unset ```IS_GEM env``` variable to meet your test needs\
