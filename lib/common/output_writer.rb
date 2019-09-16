@@ -18,7 +18,7 @@ module FacterStatistax
         test_run = @test_run.merge(facts: facts)
         output << test_run
         ::File.open(File.join(LOG_DIR, 'output.json'), 'w') do |file|
-          file.write(output.to_json)
+          file.write(JSON.pretty_generate(output))
         end
       end
 
