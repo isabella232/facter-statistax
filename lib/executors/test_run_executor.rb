@@ -32,7 +32,7 @@ module FacterStatistax
 
       def log_time(fact, time)
         FacterStatistax.logger.info("For #{fact} facts it took:")
-        FacterStatistax.logger.info("#{format('%.2f', time)}s")
+        FacterStatistax.logger.info("#{format('%<time>.2f', time: time)}s")
       end
     end
   end

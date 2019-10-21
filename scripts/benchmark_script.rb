@@ -12,9 +12,9 @@ if ARGV[0].to_s == 'false'
     require '/opt/puppetlabs/puppet/lib/libfacter.so'
   end
 elsif Gem.win_platform?
-  require 'C:\Program Files\Puppet Labs\Puppet\puppet\lib\ruby\gems\2.5.0\gems\facter-2.5.5-x64-mingw32\lib\facter.rb'
+  require 'C:\Program Files\Puppet Labs\Puppet\puppet\lib\ruby\gems\2.5.0\gems\facter-ng-0.0.10\lib\facter-ng.rb'
 else
-  require 'facter'
+  require 'facter-ng'
 end
 
 time = Benchmark.realtime do
