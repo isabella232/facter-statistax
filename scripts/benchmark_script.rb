@@ -12,7 +12,7 @@ if ARGV[0].to_s == 'false'
     require '/opt/puppetlabs/puppet/lib/libfacter.so'
   end
 elsif Gem.win_platform?
-  require 'C:\Program Files\Puppet Labs\Puppet\puppet\lib\ruby\gems\2.5.0\gems\facter-ng-4.0.0\lib\facter-ng.rb'
+  require 'C:\Program Files\Puppet Labs\Puppet\puppet\lib\ruby\gems\2.5.0\gems\facter-ng-0.0.10\lib\facter-ng.rb'
 else
   require 'facter-ng'
 end

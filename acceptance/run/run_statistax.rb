@@ -25,6 +25,7 @@ test_name 'Run facter statistax' do
                 else
                   File.join(host_dir, 'cpp')
                 end
+      FileUtils.mkdir_p(out_dir)
       scp_from agent, "#{home_dir}/log/output.json", out_dir
     end
   end
