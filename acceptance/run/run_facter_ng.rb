@@ -9,8 +9,8 @@ test_name 'Run facter-ng gem' do
     end
     # on agent, 'cd "C:\Program Files\Puppet Labs\Puppet\puppet\lib\ruby\gems\2.5.0\gems\facter-0.0.1"'
     on(agent, 'pwd').stdout.chop
-    # on agent, ruby.to_s + ' "C:\Program Files\Puppet Labs\Puppet\puppet\lib\ruby\gems\2.5.0\gems\facter-0.0.1\bin\facter"'
-    on agent, ruby.to_s + ' /opt/puppetlabs/puppet/lib/ruby/gems/2.5.0/gems/facter-0.0.1/bin/facter'
+     #on agent, ruby.to_s + ' "C:\Program Files\Puppet Labs\Puppet\puppet\lib\ruby\gems\2.5.0\gems\facter-ng-0.0.10\bin\facter-ng"'
+    on agent, ruby.to_s + ' /opt/puppetlabs/puppet/lib/ruby/gems/2.5.0/gems/facter-ng-0.0.10/bin/facter-ng'
     on agent, 'facter'
   end
 end
