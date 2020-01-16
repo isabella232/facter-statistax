@@ -12,7 +12,12 @@ if ARGV[0].to_s == 'false'
     require '/opt/puppetlabs/puppet/lib/libfacter.so'
   end
 elsif Gem.win_platform?
-  require 'C:\Program Files\Puppet Labs\Puppet\puppet\lib\ruby\gems\2.5.0\gems\facter-ng-0.0.10\lib\facter-ng.rb'
+  gems_path = 'C:/Program Files/Puppet Labs/Puppet/puppet/lib/ruby/gems'
+  ruby_version = Dir.entries(gems_path).select { |file| file =~ /[0-9]+.[0-9]+.[0-9]+/ }
+  facter_ng_path =  File.join(gems_path, ruby_version, 'gems')
+  facter_ng_version = Dir.entries(facter_ng_path).select { |file| file =~ /facter-ng-4/ }
+  facter_ng_path = File.join(facter_ng_path, facter_ng_version, 'lib', 'facter-ng.rb')
+  require facter_ng_path
 else
   require 'facter-ng'
 end
