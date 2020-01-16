@@ -3,20 +3,124 @@
     "test_run":"TestRun1",
     "runs":[
       {
+        "fact": "aio_agent_version",
+        "repetitions": 10
+      },
+      {
+        "fact": "augeas",
+        "repetitions": 10
+      },
+      {
+        "fact": "disks",
+        "repetitions": 10
+      },
+      {
+        "fact":"dmi",
+        "repetitions":10
+      },
+      {
+        "fact": "facterversion",
+        "repetitions": 10
+      },
+      {
+        "fact":"filesystems",
+        "repetitions":10
+      },
+      {
+        "fact": "hypervisors",
+        "repetitions": 10
+      },
+      {
+        "fact":"identity",
+        "repetitions":10
+      },
+      {
+        "fact":"is_virtual",
+        "repetitions":10
+      },
+      {
+        "fact":"kernel",
+        "repetitions":10
+      },
+      {
+        "fact":"kernelmajversion",
+        "repetitions":10
+      },
+      {
+        "fact":"kernelrelease",
+        "repetitions":10
+      },
+      {
+        "fact":"kernelversion",
+        "repetitions":10
+      },
+      {
+        "fact":"load_averages",
+        "repetitions":10
+      },
+      {
+        "fact":"memory",
+        "repetitions":10
+      },
+      {
+        "fact":"networking",
+        "repetitions":10
+      },
+      {
         "fact":"os",
-        "repetitions":3
+        "repetitions":10
+      },
+      {
+        "fact":"path",
+        "repetitions":10
       },
       {
         "fact":"processors",
-        "repetitions":1
+        "repetitions":10
+      },
+      {
+        "fact":"ruby",
+        "repetitions":10
+      },
+      {
+        "fact":"solaris_zones",
+        "repetitions":10
+      },
+      {
+        "fact":"ssh",
+        "repetitions":10
+      },
+      {
+        "fact":"system_uptime",
+        "repetitions":10
+      },
+      {
+        "fact":"timezone",
+        "repetitions":10
       },
       {
         "fact":"virtual",
-        "repetitions":3
+        "repetitions":10
       },
       {
-        "fact":"all",
-        "repetitions":3
+        "fact":"zfs_featurenumbers",
+        "repetitions":10
+      },
+      {
+        "fact":"zfs_version",
+        "repetitions":10
+      },
+      {
+        "fact":"zpool_featurenumbers",
+        "repetitions":10
+      },
+      {
+        "fact":"zpool_version",
+        "repetitions":10
+      },
+      {
+        "fact": "all",
+        "repetitions": 10
       }
     ]
   }
