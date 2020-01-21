@@ -23,6 +23,7 @@ gem "beaker-docker", *location_for(ENV['BEAKER_DOCKER_VERSION'] || "~> 0.5")
 gem "rake", "~> 10.1"
 gem "httparty", :require => false
 gem 'uuidtools', :require => false
+gem "google-api-client", "~>0.36.4"
 
 group(:test) do
   gem "rspec", "~> 2.14.0", :require => false
