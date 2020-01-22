@@ -39,11 +39,15 @@ test_name 'Run facter statistax' do
       end
     end
 
-    step 'Save output' do
+    step 'Save output to files' do
       out_dir = File.join(host_dir, 'cpp')
 
       FileUtils.mkdir_p(out_dir)
       scp_from agent, "#{home_dir}/log/output.json", out_dir
+    end
+
+    step 'Parse output to Google spreadsheet' do
+      LogPerformanceTimes.new('../log_dir').populate_logs
     end
   end
 end

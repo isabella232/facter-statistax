@@ -7,10 +7,9 @@ class LogPerformanceTimes
   LOG_FILES_PER_PLATFORM = 2
   FACTER_TYPES = ['cpp', 'gem']
   SPREADSHEET_ID = '1giARlXsBSGhxIWRlThV8QfmybeAfaBrNRzdr9C0pvPw'
-  STATISTAX_LOG_FOLDER = '../log_dir'
 
-  def initialize()
-    @log_parser = LogParser.new(STATISTAX_LOG_FOLDER, LOG_FILES_PER_PLATFORM)
+  def initialize(statistax_logs_folder)
+    @log_parser = LogParser.new(statistax_logs_folder, LOG_FILES_PER_PLATFORM)
     @log_writer = WriteTimesToLogger.new(GoogleSheets.new(SPREADSHEET_ID), FACTER_TYPES)
   end
 
@@ -95,8 +94,8 @@ class WriteTimesToLogger
     create_missing_platform_pages
     page_names = @log_writer.name_and_path_of_pages #done to get pages that are newly created
     @performance_times.keys.each do |platform|
-      table_facts = create_title_rows(platform, page_names[platform])
-      write_performance_times(table_facts, platform)
+      facts_order_in_table = create_title_rows(platform, page_names[platform])
+      write_performance_times(facts_order_in_table, platform)
     end
   end
 
@@ -108,20 +107,22 @@ class WriteTimesToLogger
     @log_writer.create_pages(extracted_platforms - logged_platforms)
   end
 
-  def create_title_rows(platform, page_id)
+  def create_title_rows(platform, page_location)
     #fact names are stored on the first table row
     stored_facts = @log_writer.get_rows_from_page(platform, PositionInTable.new(0, 0, nil, 0))[0]
     new_facts = @performance_times[platform].keys - stored_facts
     #fact names occupy 2 cells, so one of them is empty
     facts_row_with_spaces = new_facts.flat_map{|x| ['', x]}[0..-1]
 
-    #write new fact names from the row beggining if the page is empty, or after the last fact name
-    # The if condition has a 1 shouldn't it be 0? and if no facts shouldn't you start from 1?
-    new_facts_append_position = PositionInTable.new(stored_facts.size == 1 ? 0 : stored_facts.size + 1,0,nil,0)
-    #somehow avoid giving the page name and id separate
-    @log_writer.add_header([facts_row_with_spaces], platform, page_id, new_facts_append_position)
+    #write new fact names from the second column (the first one is reserved for the date) if the page is empty,
+    # or after the last fact name
+    new_facts_append_position = PositionInTable.new(stored_facts.size + 1,0,nil,0)
 
+    puts 'Adding fact names.'
+    @log_writer.add_row_with_merged_cells(facts_row_with_spaces, platform, page_location, new_facts_append_position)
+    puts 'Adding facter types.'
     create_facter_type_row(facts_row_with_spaces.size, new_facts_append_position.start_column, platform, stored_facts.empty?)
+
     stored_facts_order = stored_facts + facts_row_with_spaces
     stored_facts_order.delete('')
     stored_facts_order
@@ -138,9 +139,9 @@ class WriteTimesToLogger
     @log_writer.write_to_page([facter_types_row], platform, facter_types_position)
   end
 
-  def write_performance_times(facts_list, platform)
+  def write_performance_times(facts_order_list, platform)
     row = [Time.now.to_i] #adding timestamp
-    facts_list.each do |fact|
+    facts_order_list.each do |fact|
       if @performance_times[platform][fact].nil?
         row.concat(['', '']) #skip values for missing fact
       else
@@ -148,9 +149,7 @@ class WriteTimesToLogger
         row << @performance_times[platform][fact][@facter_types[1]]
       end
     end
+    puts 'Adding performance times.'
     @log_writer.write_to_page([row], platform, PositionInTable.new(0,2,nil,2))
   end
 end
-
-logger = LogPerformanceTimes.new
-logger.populate_logs
