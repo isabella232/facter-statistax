@@ -1,5 +1,5 @@
 class PositionInTable
-  attr_accessor :start_row, :start_column, :end_column, :end_row
+  attr_reader :start_row, :start_column, :end_column, :end_row
   def initialize(start_column, start_row, end_column, end_row)
     @start_column = start_column
     @start_row = start_row

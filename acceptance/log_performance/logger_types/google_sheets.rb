@@ -1,5 +1,5 @@
 require 'google/apis/sheets_v4'
-require 'googleauth'
+require 'google_auth'
 require_relative '../logger_types/google_sheets'
 
 class GoogleSheets
@@ -38,7 +38,7 @@ class GoogleSheets
     batch_update_spreadsheet(requests, "Created pages: #{page_names.join(", ")}")
   end
 
-  def get_values_from_page(page_name, position_in_table)
+  def get_rows_from_page(page_name, position_in_table)
     normalized_range = convert_to_a1_notation(position_in_table)
     response = @service.get_spreadsheet_values(@spreadsheet_id, get_sheet_range_string(page_name, normalized_range))
     response.values.nil? ? [[]] : response.values
@@ -111,10 +111,10 @@ class GoogleSheets
   def create_merge_request(start_column, end_column, sheet_id, row_index)
     range = Google::Apis::SheetsV4::GridRange.new
     range.sheet_id = sheet_id
-    range.start_column = start_column
-    range.start_row = row_index
-    range.end_column = end_column + 1
-    range.end_row = row_index + 1
+    range.start_column_index = start_column
+    range.start_row_index = row_index
+    range.end_column_index = end_column + 1
+    range.end_row_index = row_index + 1
 
     merge_cells_request = Google::Apis::SheetsV4::MergeCellsRequest.new
     merge_cells_request.merge_type = 'MERGE_ROWS'
