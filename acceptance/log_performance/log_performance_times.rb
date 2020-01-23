@@ -27,8 +27,8 @@ class LogParser
   end
 
   def extract_performance_times_hash
-    FileFolderUtils.get_sub_folder_path(@log_dir_path).each do |platform|
-      json_file_paths = FileFolderUtils.get_subfile_paths_by_type("#{@log_dir_path}/#{platform}", 'json')
+    FileFolderUtils.get_children_names(@log_dir_path).each do |platform|
+      json_file_paths = FileFolderUtils.get_sub_file_paths_by_type(File.join(@log_dir_path, platform), 'json')
       if json_file_paths.length != @log_files_per_platform
         puts "Something went wrong with logs for platform #{platform}. Skipping it!"
         next
@@ -94,6 +94,7 @@ class WriteTimesToLogger
     create_missing_platform_pages
     page_names = @log_writer.name_and_path_of_pages #done to get pages that are newly created
     @performance_times.keys.each do |platform|
+      puts "\nWriting results for platform #{platform}\n"
       facts_order_in_table = create_title_rows(platform, page_names[platform])
       write_performance_times(facts_order_in_table, platform)
     end
@@ -112,7 +113,7 @@ class WriteTimesToLogger
     stored_facts = @log_writer.get_rows_from_page(platform, PositionInTable.new(0, 0, nil, 0))[0]
     new_facts = @performance_times[platform].keys - stored_facts
     #fact names occupy 2 cells, so one of them is empty
-    facts_row_with_spaces = new_facts.flat_map{|x| ['', x]}[0..-1]
+    facts_row_with_spaces = new_facts.flat_map{|x| ['', x]}
 
     #write new fact names from the second column (the first one is reserved for the date) if the page is empty,
     # or after the last fact name
@@ -123,6 +124,10 @@ class WriteTimesToLogger
     puts 'Adding facter types.'
     create_facter_type_row(facts_row_with_spaces.size, new_facts_append_position.start_column, platform, stored_facts.empty?)
 
+    get_new_facts_order(facts_row_with_spaces, stored_facts)
+  end
+
+  def get_new_facts_order(facts_row_with_spaces, stored_facts)
     stored_facts_order = stored_facts + facts_row_with_spaces
     stored_facts_order.delete('')
     stored_facts_order
