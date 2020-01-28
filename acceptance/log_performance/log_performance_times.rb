@@ -1,7 +1,5 @@
 require_relative 'logger_types/google_sheets'
-require_relative 'file_folder_utils'
-require_relative 'json_reader'
-require_relative 'position_in_table'
+require_relative 'utils'
 
 class LogPerformanceTimes
   LOG_FILES_PER_PLATFORM = 2
@@ -93,10 +91,16 @@ class WriteTimesToLogger
     @performance_times = times_to_log
     create_missing_platform_pages
     page_names = @log_writer.name_and_path_of_pages #done to get pages that are newly created
+    rule_range = RangeInTable.new(1, 2, 100, 1000)
     @performance_times.keys.each do |platform|
       puts "\nWriting results for platform #{platform}\n"
-      facts_order_in_table = create_title_rows(platform, page_names[platform])
+      facts_order_in_table, page_is_new = create_title_rows(platform, page_names[platform])
       write_performance_times(facts_order_in_table, platform)
+      if page_is_new
+        success_message = 'Added rule to highlight gem run time increased over 100%!'
+        rule = ConditionRule.greater_than(100, rule_range)
+        @log_writer.format_range_by_condition(Color.new(1), page_names[platform], rule, rule_range, success_message)
+      end
     end
   end
 
@@ -110,21 +114,21 @@ class WriteTimesToLogger
 
   def create_title_rows(platform, page_location)
     #fact names are stored on the first table row
-    stored_facts = @log_writer.get_rows_from_page(platform, PositionInTable.new(0, 0, nil, 0))[0]
+    stored_facts = @log_writer.get_rows_from_page(platform, RangeInTable.new(0, 0, nil, 0))[0]
     new_facts = @performance_times[platform].keys - stored_facts
     #fact names occupy FACT_COLUMNS.size cells, so just the last one has the fact name, the rest are empty
     facts_row_with_spaces = new_facts.flat_map { |fact_name| [''] * (@facter_columns.size - 1) << fact_name }
 
     #write new fact names from the second column (the first one is reserved for the date) if the page is empty,
     # or after the last fact name
-    new_facts_append_position = PositionInTable.new(stored_facts.size + 1, 0, nil, 0)
+    new_facts_append_range = RangeInTable.new(stored_facts.size + 1, 0, nil, 0)
 
     puts 'Adding fact names.'
-    @log_writer.add_row_with_merged_cells(facts_row_with_spaces, platform, page_location, new_facts_append_position)
+    @log_writer.add_row_with_merged_cells(facts_row_with_spaces, platform, page_location, new_facts_append_range)
     puts 'Adding facter types.'
-    create_facter_type_row(facts_row_with_spaces.size, new_facts_append_position.start_column, platform, stored_facts.empty?)
+    create_facter_type_row(facts_row_with_spaces.size, new_facts_append_range.start_column, platform, stored_facts.empty?)
 
-    get_new_facts_order(facts_row_with_spaces, stored_facts)
+    [get_new_facts_order(facts_row_with_spaces, stored_facts), stored_facts.empty?]
   end
 
   def get_new_facts_order(facts_row_with_spaces, stored_facts)
@@ -137,11 +141,11 @@ class WriteTimesToLogger
     facter_types_row = @facter_columns * (number_of_facts_to_add / @facter_columns.size)
     if add_date_title
       facter_types_row = ['Date'].concat(facter_types_row)
-      facter_types_position = PositionInTable.new(0, 1, nil, 1)
+      facter_types_range = RangeInTable.new(0, 1, nil, 1)
     else
-      facter_types_position = PositionInTable.new(write_from_column, 1, nil, 1)
+      facter_types_range = RangeInTable.new(write_from_column, 1, nil, 1)
     end
-    @log_writer.write_to_page([facter_types_row], platform, facter_types_position)
+    @log_writer.write_to_page([facter_types_row], platform, facter_types_range)
   end
 
   def write_performance_times(facts_order_list, platform)
@@ -159,7 +163,12 @@ class WriteTimesToLogger
         row << format('%<time_difference>.2f', time_difference: gem_percentage_increase)
       end
     end
-    puts 'Adding performance times.'
-    @log_writer.write_to_page([row], platform, PositionInTable.new(0, 2, nil, 2))
+    puts 'Appending performance times.'
+    #range is for the first cell where data should be added on the sheet. If that cell is not empty, the new values will be
+    # appended under it, where possible.
+    @log_writer.write_to_page([row], platform, RangeInTable.new(0, 2, nil, 2))
   end
 end
+
+logger = LogPerformanceTimes.new('../log_dir')
+logger.populate_logs
