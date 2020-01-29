@@ -47,8 +47,8 @@ test_name 'Run facter statistax' do
       save_output(agent, home_dir, host_dir, is_gem)
     end
 
-  end
-  step 'Copy results to Google spreadsheet' do
-    LogPerformanceTimes.new(log_dir).populate_logs
+    step 'Copy results to Google spreadsheet' do
+      LogPerformanceTimes.new(log_dir).populate_logs_for(agent['platform'])
+    end
   end
 end

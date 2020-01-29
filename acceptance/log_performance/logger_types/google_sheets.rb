@@ -26,15 +26,12 @@ class GoogleSheets
     pages
   end
 
-  def create_pages(page_names)
-    requests = []
-    page_names.each do |page_name|
-      add_sheet_request = Google::Apis::SheetsV4::AddSheetRequest.new
-      add_sheet_request.properties = Google::Apis::SheetsV4::SheetProperties.new
-      add_sheet_request.properties.title = page_name
-      requests.append(add_sheet: add_sheet_request)
-    end
-    batch_update_spreadsheet(requests, "Created pages: #{page_names.join(", ")}")
+  def create_page(page_name)
+    add_sheet_request = Google::Apis::SheetsV4::AddSheetRequest.new
+    add_sheet_request.properties = Google::Apis::SheetsV4::SheetProperties.new
+    add_sheet_request.properties.title = page_name
+    requests.append(add_sheet: add_sheet_request)
+    batch_update_spreadsheet([requests], "Created page: #{page_name.join(", ")}")
   end
 
   def get_rows_from_page(page_name, range_in_table)
