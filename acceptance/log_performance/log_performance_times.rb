@@ -110,8 +110,12 @@ class WriteTimesToLogger
 
   def create_platform_page_if_missing
     logged_platforms = @log_writer.name_and_path_of_pages.keys
-    extracted_platforms = @performance_times.keys
-    @log_writer.create_page(extracted_platforms - logged_platforms)
+    platform_name = @performance_times.keys[0]
+    if logged_platforms.include?(platform_name)
+      puts 'Platform page already created.'
+    else
+      @log_writer.create_page(platform_name)
+    end
   end
 
   def create_title_rows(platform, page_location)
