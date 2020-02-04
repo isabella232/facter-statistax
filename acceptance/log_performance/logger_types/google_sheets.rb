@@ -30,8 +30,7 @@ class GoogleSheets
     add_sheet_request = Google::Apis::SheetsV4::AddSheetRequest.new
     add_sheet_request.properties = Google::Apis::SheetsV4::SheetProperties.new
     add_sheet_request.properties.title = page_name
-    requests.append(add_sheet: add_sheet_request)
-    batch_update_spreadsheet([requests], "Created page: #{page_name.join(", ")}")
+    batch_update_spreadsheet([add_sheet: add_sheet_request], "Created page: #{page_name}.")
   end
 
   def get_rows_from_page(page_name, range_in_table)

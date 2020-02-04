@@ -1,5 +1,6 @@
 require_relative 'logger_types/google_sheets'
 require_relative 'utils'
+require 'date'
 
 class LogPerformanceTimes
   LOG_FILES_PER_PLATFORM = 2
@@ -159,7 +160,7 @@ class WriteTimesToLogger
   end
 
   def write_performance_times(facts_order_list, platform)
-    row = [Time.now.to_i] # adding timestamp
+    row = [DateTime.now.strftime("%d/%m/%Y %H:%M")] # adding timestamp
     facts_order_list.each do |fact|
       if @performance_times[platform][fact].nil?
         row.concat([''] * @facter_columns.size) # skip values for missing fact
