@@ -1884,15 +1884,20 @@ jenkins_platforms = 'aix61-POWERfa aix71-POWERfa aix72-POWERfa amazon6-64a amazo
 cleaned_jenkins_platforms = jenkins_platforms.gsub('a ', ' ')
 jenkins_platforms_list = cleaned_jenkins_platforms.split()
 jenkins_platforms_list.each { |platform| platform.gsub!('f', '') if platform.start_with?('aix')}
-jenkins_platforms_list.delete_if { |platform| platform.downcase.include?('aarch')}
 
 all_platforms = osinfo
 all_platforms.merge(osinfo_bhgv1)
 
-available_platforms = []
+vmpooler_platforms = []
+nspooler_platforms = {}
 all_platforms.each do |platform, value|
-  if jenkins_platforms_list.include?(platform) && value.has_key?(:vmpooler)
-    available_platforms << platform
+  if jenkins_platforms_list.include?(platform) && value.has_key?(:abs) && !platform.start_with?('amazon')
+    nspooler_platforms[platform] = value[:abs]['template']
+    elsif jenkins_platforms_list.include?(platform) && value.has_key?(:vmpooler)
+    vmpooler_platforms << platform
   end
 end
-puts available_platforms.join('a-')
+puts vmpooler_platforms
+puts nspooler_platforms
+
+

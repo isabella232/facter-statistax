@@ -66,7 +66,6 @@ class RunPerformanceOnAllPlatforms
     @start_time = DateTime.now.strftime("%d-%m-%Y_%H:%M")
     @current_run_folder_path = "#{LOGS_FOLDER_PATH}/#{@start_time}"
     @platform = 'all'
-    @platform_log_file_path = "#{@current_run_folder_path}/#{@platform}.log"
     @error_lines = Set.new
   end
 
@@ -84,11 +83,11 @@ class RunPerformanceOnAllPlatforms
       run_statistax_on_vmPooler
 
       ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      @platform = 'all'
-      append_to_log("Entire run took: #{(ending - starting)/60} minutes.")
+      append_to_log("Entire run took: #{(ending - starting) / 60} minutes.", 'all')
     rescue Exception => e
-      puts e.message + "\n" + e.backtrace.inspect.gsub(', ', "\n")
-      File.open(FAILURES_FILE_PATH, mode: 'a') { |file| file.write("\n\n#{@start_time}\n" + e.message + "\n" + e.backtrace.inspect.gsub(', ', "\n")) }
+      error_message = e.message + "\n" + e.backtrace.inspect.gsub(', ', "\n")
+      puts error_message
+      append_to_log("\n\n#{@start_time}\n" + error_message, 'script_failure')
     end
   end
 
@@ -97,17 +96,17 @@ class RunPerformanceOnAllPlatforms
   end
 
   def get_latest_agent_build_sha
-    append_to_log('Get latest agent build SHA!', false)
+    append_to_log('Get latest agent build SHA!', 'all', false)
     run_command('curl --fail --silent GET --url http://builds.delivery.puppetlabs.net/passing-agent-SHAs/puppet-agent-master')
   end
 
   def create_latest_facter_gem
     Dir.chdir(FACTER_NG_PROJECT_PATH) do
-      append_to_log('Get latest changes in Facter-NG project.', false)
+      append_to_log('Get latest changes in Facter-NG project.', 'all', false)
       run_command('git pull')
     end
     Dir.chdir(STATISTAX_ACCEPTANCE_FOLDER_PATH) do
-      append_to_log('Build Facter-NG gem file.', false)
+      append_to_log('Build Facter-NG gem file.', 'all', false)
       run_command('bash build_facter_ng_gem.sh')
     end
   end
@@ -118,7 +117,7 @@ class RunPerformanceOnAllPlatforms
       @platform = platform
       run_statistax_test_commands(platform)
       ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      append_to_log("Running time was: #{(ending - starting)/60} minutes.")
+      append_to_log("Running time was: #{(ending - starting) / 60} minutes.")
     end
   end
 
@@ -141,9 +140,9 @@ class RunPerformanceOnAllPlatforms
     output = ""
     Open3.popen2e(environment_variables, command) do |stdin, stdout_and_stderr, wait_thr|
       stdout_and_stderr.each do |line|
+        output << line
         puts line
         check_line_for_errors(line)
-        output << line
       end
     end
     append_to_log("Running command: #{command}\nOutput:\n#{output}")
@@ -152,7 +151,7 @@ class RunPerformanceOnAllPlatforms
 
   def check_line_for_errors(line)
     errors_list = [
-        'No such file or directory',
+        'Retrying in',
         'No such file or directory',
         'command not found',
         'InvalidURIError',
@@ -161,13 +160,19 @@ class RunPerformanceOnAllPlatforms
     ]
     errors_list.each do |error|
       if line.include?(error)
-        @error_lines << line
+        @error_lines << line[line.index(error)..] #extract content after run time details
       end
     end
   end
 
-  def append_to_log(message, with_spaces=true)
-    File.open(@platform_log_file_path, mode: 'a') do |file|
+  def append_to_log(message, platform = nil, with_spaces = true)
+    platform_log_file_path = if platform.nil?
+                               "#{@current_run_folder_path}/#{@platform}.log"
+                             else
+                               "#{@current_run_folder_path}/#{platform}.log"
+                             end
+
+    File.open(platform_log_file_path, mode: 'a') do |file|
       if with_spaces == true
         file.write("\n\n#{message}\n\n")
       else
@@ -190,7 +195,7 @@ class RunPerformanceOnAllPlatforms
         run_command(BEAKER_ENV_VARS, "curl -H X-AUTH-TOKEN:VmPoolerAuthToken -X POST -d '' --url https://nspooler-service-prod-1.delivery.puppetlabs.net/api/v1/maint/reset/#{nspooler_host_name}")
       end
       ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-      append_to_log("Running time was: #{(ending - starting)/60} minutes.")
+      append_to_log("Running time was: #{(ending - starting) / 60} minutes.")
     end
   end
 
@@ -213,9 +218,8 @@ class RunPerformanceOnAllPlatforms
 
   def log_all_error_lines
     current_platform = @platform
-    @platform = 'run_failures'
     unless @error_lines.empty?
-      append_to_log("#{@start_time} Platform: #{current_platform}  Errors:   #{@error_lines.to_a.join('\n')}\n")
+      append_to_log("#{@start_time} Platform: #{current_platform}  Errors:\n#{@error_lines.to_a.join("\n")}\n", 'run_failures')
       @error_lines = Set.new
     end
     @platform = current_platform
