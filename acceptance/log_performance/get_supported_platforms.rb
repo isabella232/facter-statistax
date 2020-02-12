@@ -1,1889 +1,1892 @@
+
 def osinfo
-  {
-      'aix53-POWER' => {
-          :general => {
-              'platform'           => 'aix-5.3-power',
-              'packaging_platform' => 'aix-5.3-power'
-          },
-          :abs => {
-              'template' => 'aix-5.3-power'
-          }
-      },
-      'aix61-POWER' => {
-          :general => {
-              'platform'           => 'aix-6.1-power',
-              'packaging_platform' => 'aix-6.1-power'
-          },
-          :abs => {
-              'template' => 'aix-6.1-power'
-          }
-      },
-      'aix71-POWER' => {
-          :general => {
-              'platform'           => 'aix-7.1-power',
-              'packaging_platform' => 'aix-7.1-power'
-          },
-          :abs => {
-              'template' => 'aix-7.1-power'
-          }
-      },
-      'aix72-POWER' => {
-          :general => {
-              'platform'           => 'aix-7.2-power',
-              'packaging_platform' => 'aix-7.1-power'
-          },
-          :abs => {
-              'template' => 'aix-7.2-power'
-          }
-      },
-      'amazon6-64' => {
-          :general => {
-              'platform'           => 'el-6-x86_64',
-              'packaging_platform' => 'el-6-x86_64'
-          },
-          :abs => {
-              'template' => 'amazon-6-x86_64'
-          }
-      },
-      'amazon7-64' => {
-          :general => {
-              'platform'           => 'el-7-x86_64',
-              'packaging_platform' => 'el-7-x86_64'
-          },
-          :abs => {
-              'template' => 'amazon-7-x86_64'
-          }
-      },
-      'amazon7-ARM64' => {
-          :general => {
-              'platform'           => 'el-7-aarch64',
-              'packaging_platform' => 'el-7-aarch64'
-          },
-          :abs => {
-              'template' => 'amazon-7-arm64'
-          }
-      },
-      'arista4-32' => {
-          :general => {
-              'platform'           => 'eos-4-i386',
-              'packaging_platform' => 'eos-4-i386'
-          },
-          :vmpooler => {
-              'template' => 'arista-4-i386'
-          }
-      },
-      'centos4-32' => {
-          :general => {
-              'platform' => 'el-4-i386'
-          },
-          :vmpooler => {
-              'template' => 'centos-4-i386'
-          }
-      },
-      'centos4-64' => {
-          :general => {
-              'platform' => 'el-4-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'centos-4-x86_64'
-          }
-      },
-      'centos5-32' => {
-          :general => {
-              'platform'           => 'el-5-i386',
-              'packaging_platform' => 'el-5-i386'
-          },
-          :vmpooler => {
-              'template' => 'centos-5-i386'
-          }
-      },
-      'centos5-64' => {
-          :general => {
-              'platform'           => 'el-5-x86_64',
-              'packaging_platform' => 'el-5-x86_64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/mingetty',
-                  'yum install -y crontabs initscripts iproute openssl sysvinit-tools tar wget which',
-                  'sed -i -e "/mingetty/d" /etc/inittab'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'centos-5-x86_64'
-          }
-      },
-      'centos6-32' => {
-          :general => {
-              'platform'           => 'el-6-i386',
-              'packaging_platform' => 'el-6-i386'
-          },
-          :vmpooler => {
-              'template' => 'centos-6-i386'
-          }
-      },
-      'centos6-64' => {
-          :general => {
-              'platform'           => 'el-6-x86_64',
-              'packaging_platform' => 'el-6-x86_64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/mingetty',
-                  'rm -rf /var/run/network/*',
-                  'yum install -y crontabs initscripts iproute openssl sysvinit-tools tar wget which',
-                  'rm /etc/init/tty.conf'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'centos-6-x86_64'
-          }
-      },
-      'centos7-64' => {
-          :general => {
-              'platform'           => 'el-7-x86_64',
-              'packaging_platform' => 'el-7-x86_64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'yum install -y crontabs initscripts iproute openssl sysvinit-tools tar wget which ss'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'centos-7-x86_64'
-          }
-      },
-      'centos8-64' => {
-          :general => {
-              'platform'           => 'el-8-x86_64',
-              'packaging_platform' => 'el-8-x86_64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'yum install -y crontabs initscripts iproute openssl wget which'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'centos-8-x86_64'
-          }
-      },
-      # Deprecated
-      'cisconx-64' => {
-          :general => {
-              'platform'           => 'cisco_nexus-7-x86_64',
-              'packaging_platform' => 'cisco-wrlinux-5-x86_64',
-              'vrf' => 'management',
-              'ssh' => {
-                  'user' => 'beaker'
-              }
-          },
-          :vmpooler => {
-              'template' => 'cisco-nxos-9k-x86_64'
-          }
-      },
-      # Deprecated
-      'ciscon7k-64' => {
-          :general => {
-              'platform'           => 'cisco_nexus-7k-x86_64',
-              'packaging_platform' => 'cisco-wrlinux-5-x86_64',
-              'vrf' => 'management',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-n7k-7k-x86_64'
-          }
-      },
-      # Deprecated
-      'cisconxhw-64' => {
-          :general => {
-              'platform'           => 'cisco_nexus-7-x86_64',
-              'packaging_platform' => 'cisco-wrlinux-5-x86_64',
-              'vrf' => 'management',
-              'ssh' => {
-                  'user' => 'devops'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-nxos_hw-9k-x86_64'
-          }
-      },
-      'cisco_n9k-VM' => {
-          :general => {
-              'platform'           => 'cisco_nexus-7-x86_64',
-              'packaging_platform' => 'cisco-wrlinux-5-x86_64',
-              'vrf' => 'management',
-              'ssh' => {
-                  'user' => 'beaker'
-              }
-          },
-          :vmpooler => {
-              'template' => 'cisco-nxos-9k-x86_64'
-          }
-      },
-      'cisco_n7k-HW' => {
-          :general => {
-              'platform'           => 'cisco_nexus-7k-x86_64',
-              'packaging_platform' => 'cisco-wrlinux-5-x86_64',
-              'vrf' => 'management',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-n7k-x86_64'
-          }
-      },
-      'cisco_n7k_vdc-HW' => {
-          :general => {
-              'platform'           => 'cisco_nexus-7k-x86_64',
-              'packaging_platform' => 'cisco-wrlinux-5-x86_64',
-              'vrf' => 'management',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-n7k_vdc-x86_64'
-          }
-      },
-      'cisco_n9k-HW' => {
-          :general => {
-              'platform'           => 'cisco_nexus-7-x86_64',
-              'packaging_platform' => 'cisco-wrlinux-5-x86_64',
-              'vrf' => 'management',
-              'ssh' => {
-                  'user' => 'devops'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-n9k-x86_64'
-          }
-      },
-      'cisco_ios_c2960-HW' => {
-          :general => {
-              'platform' => 'cisco_ios-12-arm32',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-ios_c2960-arm'
-          }
-      },
-      'cisco_ios_c3560-HW' => {
-          :general => {
-              'platform' => 'cisco_ios-12-arm32',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-ios_c3560-arm'
-          }
-      },
-      'cisco_ios_c3750-HW' => {
-          :general => {
-              'platform' => 'cisco_ios-12-arm32',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-ios_c3750-arm'
-          }
-      },
-      'cisco_ios_c4507r-HW' => {
-          :general => {
-              'platform' => 'cisco_ios-12-arm32',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-ios_c4507r-arm'
-          }
-      },
-      'cisco_ios_c4948-HW' => {
-          :general => {
-              'platform' => 'cisco_ios-12-arm32',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-ios_c4948-arm'
-          }
-      },
-      'cisco_ios_c6503-HW' => {
-          :general => {
-              'platform' => 'cisco_ios-12-arm32',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-ios_c6503-arm'
-          }
-      },
-      'cisco_iosxe_c3650-HW' => {
-          :general => {
-              'platform' => 'cisco_iosxec3650-arm32',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-iosxe_c3650-arm'
-          }
-      },
-      'cisco_iosxe_c4503-HW' => {
-          :general => {
-              'platform' => 'cisco_iosxe-3-arm32',
-              'ssh' => {
-                  'user' => 'admin'
-              }
-          },
-          :abs => {
-              'template' => 'cisco-iosxe_c4503-arm'
-          }
-      },
-      'cisco_xr_9k-VM' => {
-          :general => {
-              'platform'           => 'cisco_ios_xr-6-x86_64',
-              'packaging_platform' => 'cisco-wrlinux-7-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'cisco-exr-9k-x86_64'
-          }
-      },
-      'cumulus25-64' => {
-          :general => {
-              'platform'           => 'cumulus-2.5-x86_64',
-              'packaging_platform' => 'cumulus-2.2-amd64'
-          },
-          :vmpooler => {
-              'template' => 'cumulus-vx-25-x86_64'
-          }
-      },
-      'debian6-32' => {
-          :general => {
-              'platform' => 'debian-6-i386'
-          },
-          :vmpooler => {
-              'template' => 'debian-6-i386'
-          }
-      },
-      'debian6-64' => {
-          :general => {
-              'platform' => 'debian-6-amd64'
-          },
-          :vmpooler => {
-              'template' => 'debian-6-x86_64'
-          }
-      },
-      'debian7-32' => {
-          :general => {
-              'platform'           => 'debian-7-i386',
-              'packaging_platform' => 'debian-7-i386'
-          },
-          :vmpooler => {
-              'template' => 'debian-7-i386'
-          }
-      },
-      'debian7-64' => {
-          :general => {
-              'platform'           => 'debian-7-amd64',
-              'packaging_platform' => 'debian-7-amd64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/getty',
-                  'apt-get update && apt-get install -y cron locales-all net-tools wget'
-              ],
-          },
-          :vagrant => {
-              'box' => 'debian/wheezy64',
-          },
-          :vmpooler => {
-              'template' => 'debian-7-x86_64'
-          }
-      },
-      'debian8-32' => {
-          :general => {
-              'platform'           => 'debian-8-i386',
-              'packaging_platform' => 'debian-8-i386'
-          },
-          :vmpooler => {
-              'template' => 'debian-8-i386'
-          }
-      },
-      'debian8-64' => {
-          :general => {
-              'platform'           => 'debian-8-amd64',
-              'packaging_platform' => 'debian-8-amd64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'rm -f /usr/sbin/policy-rc.d',
-                  'apt-get update && apt-get install -y cron locales-all net-tools wget'
-              ]
-          },
-          :vagrant => {
-              'box' => 'debian/jessie64',
-          },
-          :vmpooler => {
-              'template' => 'debian-8-x86_64'
-          }
-      },
-      'debian9-32' => {
-          :general => {
-              'platform'           => 'debian-9-i386',
-              'packaging_platform' => 'debian-9-i386'
-          },
-          :vmpooler => {
-              'template' => 'debian-9-i386'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'rm -f /usr/sbin/policy-rc.d',
-                  'apt-get update && apt-get install -y cron locales-all net-tools wget'
-              ]
-          }
-      },
-      'debian9-64' => {
-          :general => {
-              'platform'           => 'debian-9-amd64',
-              'packaging_platform' => 'debian-9-amd64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'rm -f /usr/sbin/policy-rc.d',
-                  'apt-get update && apt-get install -y cron locales-all net-tools wget systemd-sysv gnupg'
-              ]
-          },
-          :vagrant => {
-              'box' => 'debian/stretch64',
-          },
-          :vmpooler => {
-              'template' => 'debian-9-x86_64'
-          }
-      },
-      'debian10-64' => {
-          :general => {
-              'platform'           => 'debian-10-amd64',
-              'packaging_platform' => 'debian-10-amd64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'rm -f /usr/sbin/policy-rc.d',
-                  'apt-get update && apt-get install -y cron locales-all net-tools wget gnupg'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'debian-10-x86_64'
-          }
-      },
-      'debian10-32' => {
-          :general => {
-              'platform'           => 'debian-10-i386',
-              'packaging_platform' => 'debian-10-i386'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'rm -f /usr/sbin/policy-rc.d',
-                  'apt-get update && apt-get install -y cron locales-all net-tools wget gnupg'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'debian-10-i386'
-          }
-      },
-      'fedora14-32' => {
-          :general => {
-              'platform' => 'fedora-14-i386'
-          },
-          :vmpooler => {
-              'template' => 'fedora-14-i386'
-          }
-      },
-      'fedora19-32' => {
-          :general => {
-              'platform' => 'fedora-19-i386'
-          },
-          :vmpooler => {
-              'template' => 'fedora-19-i386'
-          }
-      },
-      'fedora19-64' => {
-          :general => {
-              'platform' => 'fedora-19-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-19-x86_64'
-          }
-      },
-      'fedora20-32' => {
-          :general => {
-              'platform' => 'fedora-20-i386'
-          },
-          :vmpooler => {
-              'template' => 'fedora-20-i386'
-          }
-      },
-      'fedora20-64' => {
-          :general => {
-              'platform' => 'fedora-20-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-20-x86_64'
-          }
-      },
-      'fedora21-32' => {
-          :general => {
-              'platform' => 'fedora-21-i386'
-          },
-          :vmpooler => {
-              'template' => 'fedora-21-i386'
-          }
-      },
-      'fedora21-64' => {
-          :general => {
-              'platform' => 'fedora-21-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-21-x86_64'
-          }
-      },
-      'fedora22-32' => {
-          :general => {
-              'platform' => 'fedora-22-i386'
-          },
-          :vmpooler => {
-              'template' => 'fedora-22-i386'
-          }
-      },
-      'fedora22-64' => {
-          :general => {
-              'platform' => 'fedora-22-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-22-x86_64'
-          }
-      },
-      'fedora23-32' => {
-          :general => {
-              'platform' => 'fedora-23-i386'
-          },
-          :vmpooler => {
-              'template' => 'fedora-23-i386'
-          }
-      },
-      'fedora23-64' => {
-          :general => {
-              'platform' => 'fedora-23-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-23-x86_64'
-          }
-      },
-      'fedora24-32' => {
-          :general => {
-              'platform'           => 'fedora-24-i386',
-              'packaging_platform' => 'fedora-24-i386'
-          },
-          :vmpooler => {
-              'template' => 'fedora-24-i386'
-          }
-      },
-      'fedora24-64' => {
-          :general => {
-              'platform'           => 'fedora-24-x86_64',
-              'packaging_platform' => 'fedora-24-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-24-x86_64'
-          }
-      },
-      'fedora25-32' => {
-          :general => {
-              'platform'           => 'fedora-25-i386',
-              'packaging_platform' => 'fedora-25-i386'
-          },
-          :vmpooler => {
-              'template' => 'fedora-25-i386'
-          }
-      },
-      'fedora25-64' => {
-          :general => {
-              'platform'           => 'fedora-25-x86_64',
-              'packaging_platform' => 'fedora-25-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-25-x86_64'
-          }
-      },
-      'fedora26-64' => {
-          :general => {
-              'platform'           => 'fedora-26-x86_64',
-              'packaging_platform' => 'fedora-26-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-26-x86_64'
-          }
-      },
-      'fedora27-64' => {
-          :general => {
-              'platform'           => 'fedora-27-x86_64',
-              'packaging_platform' => 'fedora-27-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-27-x86_64'
-          }
-      },
-      'fedora28-64' => {
-          :general => {
-              'platform'           => 'fedora-28-x86_64',
-              'packaging_platform' => 'fedora-28-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-28-x86_64'
-          }
-      },
-      'fedora29-64' => {
-          :general => {
-              'platform'           => 'fedora-29-x86_64',
-              'packaging_platform' => 'fedora-29-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-29-x86_64'
-          }
-      },
-      'fedora30-64' => {
-          :general => {
-              'platform'           => 'fedora-30-x86_64',
-              'packaging_platform' => 'fedora-30-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-30-x86_64'
-          }
-      },
-      'fedora31-64' => {
-          :general => {
-              'platform'           => 'fedora-31-x86_64',
-              'packaging_platform' => 'fedora-31-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'fedora-31-x86_64'
-          }
-      },
-      'huaweios6-POWER' => {
-          :general => {
-              'platform' => 'huaweios-6-powerpc'
-          },
-          :abs => {
-              'template' => 'huaweios-6-powerpc'
-          }
-      },
-      'panos61-64' => {
-          :general => {
-              'platform' => 'palo-alto-6.1.0-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'palo-alto-6.1.0-x86_64'
-          }
-      },
-      'panos71-64' => {
-          :general => {
-              'platform' => 'palo-alto-7.1.0-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'palo-alto-7.1.0-x86_64'
-          }
-      },
-      'panos81-64' => {
-          :general => {
-              'platform' => 'palo-alto-8.1.0-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'palo-alto-8.1.0-x86_64'
-          }
-      },
-      'opensuse11-32' => {
-          :general => {
-              'platform' => 'opensuse-11-i386'
-          },
-          :vmpooler => {
-              'template' => 'opensuse-11-i386'
-          }
-      },
-      'opensuse11-64' => {
-          :general => {
-              'platform' => 'opensuse-11-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'opensuse-11-x86_64'
-          }
-      },
-      'oracle5-32' => {
-          :general => {
-              'platform'           => 'el-5-i386',
-              'packaging_platform' => 'el-5-i386'
-          },
-          :vmpooler => {
-              'template' => 'oracle-5-i386'
-          }
-      },
-      'oracle5-64' => {
-          :general => {
-              'platform'           => 'el-5-x86_64',
-              'packaging_platform' => 'el-5-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'oracle-5-x86_64'
-          }
-      },
-      'oracle6-32' => {
-          :general => {
-              'platform'           => 'el-6-i386',
-              'packaging_platform' => 'el-6-i386'
-          },
-          :vmpooler => {
-              'template' => 'oracle-6-i386'
-          }
-      },
-      'oracle6-64' => {
-          :general => {
-              'platform'           => 'el-6-x86_64',
-              'packaging_platform' => 'el-6-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'oracle-6-x86_64'
-          }
-      },
-      'oracle7-64' => {
-          :general => {
-              'platform'           => 'el-7-x86_64',
-              'packaging_platform' => 'el-7-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'oracle-7-x86_64'
-          }
-      },
-      'osx109-64' => {
-          :general => {
-              'platform' => 'osx-10.9-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'osx-109-x86_64'
-          }
-      },
-      'osx1010-64' => {
-          :general => {
-              'platform'           => 'osx-10.10-x86_64',
-              'packaging_platform' => 'osx-10.10-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'osx-1010-x86_64'
-          }
-      },
-      'osx1011-64' => {
-          :general => {
-              'platform'           => 'osx-10.11-x86_64',
-              'packaging_platform' => 'osx-10.11-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'osx-1011-x86_64'
-          }
-      },
-      'osx1012-64' => {
-          :general => {
-              'platform'           => 'osx-10.12-x86_64',
-              'packaging_platform' => 'osx-10.12-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'osx-1012-x86_64'
-          }
-      },
-      'osx1013-64' => {
-          :general => {
-              'platform'           => 'osx-10.13-x86_64',
-              'packaging_platform' => 'osx-10.13-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'osx-1013-x86_64'
-          }
-      },
-      'osx1014-64' => {
-          :general => {
-              'platform'           => 'osx-10.14-x86_64',
-              'packaging_platform' => 'osx-10.14-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'osx-1014-x86_64'
-          }
-      },
-      'osx1015-64' => {
-          :general => {
-              'platform'           => 'osx-10.15-x86_64',
-              'packaging_platform' => 'osx-10.15-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'osx-1015-x86_64'
-          }
-      },
-      'redhat4-32' => {
-          :general => {
-              'platform' => 'el-4-i386'
-          },
-          :vmpooler => {
-              'template' => 'redhat-4-i386'
-          }
-      },
-      'redhat4-64' => {
-          :general => {
-              'platform' => 'el-4-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'redhat-4-x86_64'
-          }
-      },
-      'redhat5-32' => {
-          :general => {
-              'platform'          => 'el-5-i386',
-              'packaging_platform' => 'el-5-i386'
-          },
-          :vmpooler => {
-              'template' => 'redhat-5-i386'
-          }
-      },
-      'redhat5-64' => {
-          :general => {
-              'platform'          => 'el-5-x86_64',
-              'packaging_platform' => 'el-5-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'redhat-5-x86_64'
-          }
-      },
-      'redhat6-32' => {
-          :general => {
-              'platform'          => 'el-6-i386',
-              'packaging_platform' => 'el-6-i386'
-          },
-          :vmpooler => {
-              'template' => 'redhat-6-i386'
-          }
-      },
-      'redhat6-64' => {
-          :general => {
-              'platform'           => 'el-6-x86_64',
-              'packaging_platform' => 'el-6-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'redhat-6-x86_64'
-          }
-      },
-      'redhat6-S390X' => {
-          :general => {
-              'platform'          => 'el-6-s390x',
-              'packaging_platform' => 'el-6-s390x'
-          },
-      },
-      'redhat7-64' => {
-          :general => {
-              'platform'           => 'el-7-x86_64',
-              'packaging_platform' => 'el-7-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'redhat-7-x86_64'
-          }
-      },
-      'redhatfips7-64' => {
-          :general => {
-              'platform'           => 'el-7-x86_64',
-              'packaging_platform' => 'redhatfips-7-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'redhat-fips-7-x86_64'
-          }
-      },
-      'redhat7-POWER' => {
-          :general => {
-              'platform'           => 'el-7-ppc64le',
-              'packaging_platform' => 'el-7-ppc64le'
-          },
-          :abs => {
-              'template' => 'redhat-7.3-power8'
-          }
-      },
-      'redhat7-S390X' => {
-          :general => {
-              'platform'           => 'el-7-s390x',
-              'packaging_platform' => 'el-7-s390x'
-          },
-      },
-      'redhat7-AARCH64' => {
-          :general => {
-              'platform'           => 'el-7-aarch64',
-              'packaging_platform' => 'el-7-aarch64'
-          },
-          :abs => {
-              'template' => 'centos-7-arm64'
-          },
-          :vmpooler => {
-              'template' => 'redhat-7-x86_64'
-          }
-      },
-      'redhat8-64' => {
-          :general => {
-              'platform'           => 'el-8-x86_64',
-              'packaging_platform' => 'el-8-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'redhat-8-x86_64'
-          }
-      },
-      'scientific5-32' => {
-          :general => {
-              'platform'           => 'el-5-i386',
-              'packaging_platform' => 'el-5-i386'
-          },
-          :vmpooler => {
-              'template' => 'scientific-5-i386'
-          }
-      },
-      'scientific5-64' => {
-          :general => {
-              'platform'           => 'el-5-x86_64',
-              'packaging_platform' => 'el-5-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'scientific-5-x86_64'
-          }
-      },
-      'scientific6-32' => {
-          :general => {
-              'platform'          => 'el-6-i386',
-              'packaging_platform' => 'el-6-i386'
-          },
-          :vmpooler => {
-              'template' => 'scientific-6-i386'
-          }
-      },
-      'scientific6-64' => {
-          :general => {
-              'platform'           => 'el-6-x86_64',
-              'packaging_platform' => 'el-6-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'scientific-6-x86_64'
-          }
-      },
-      'scientific7-64' => {
-          :general => {
-              'platform'          => 'el-7-x86_64',
-              'packaging_platform' => 'el-7-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'scientific-7-x86_64'
-          }
-      },
-      'sles10-32' => {
-          :general => {
-              'platform' => 'sles-10-i386'
-          },
-          :vmpooler => {
-              'template' => 'sles-10-i386'
-          }
-      },
-      'sles10-64' => {
-          :general => {
-              'platform' => 'sles-10-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'sles-10-x86_64'
-          }
-      },
-      'sles11-32' => {
-          :general => {
-              'platform'           => 'sles-11-i386',
-              'packaging_platform' => 'sles-11-i386'
-          },
-          :vmpooler => {
-              'template' => 'sles-11-i386'
-          }
-      },
-      'sles11-64' => {
-          :general => {
-              'platform'           => 'sles-11-x86_64',
-              'packaging_platform' => 'sles-11-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'sles-11-x86_64'
-          }
-      },
-      'sles11-S390X' => {
-          :general => {
-              'platform'           => 'sles-11-s390x',
-              'packaging_platform' => 'sles-11-s390x'
-          },
-      },
-      'sles12-64' => {
-          :general => {
-              'platform'           => 'sles-12-x86_64',
-              'packaging_platform' => 'sles-12-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'sles-12-x86_64'
-          }
-      },
-      'sles12-S390X' => {
-          :general => {
-              'platform'           => 'sles-12-s390x',
-              'packaging_platform' => 'sles-12-s390x'
-          }
-      },
-      'sles12-POWER' => {
-          :general => {
-              'platform'           => 'sles-12-ppc64le',
-              'packaging_platform' => 'sles-12-ppc64le'
-          },
-          :abs => {
-              'template' => 'sles-12-power8'
-          }
-      },
-      'sles15-64' => {
-          :general => {
-              'platform'           => 'sles-15-x86_64',
-              'packaging_platform' => 'sles-15-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'sles-15-x86_64'
-          }
-      },
-      'solaris10-32' => {
-          :general => {
-              'platform'           => 'solaris-10-i386',
-              'packaging_platform' => 'solaris-10-i386'
-          },
-          :vmpooler => {
-              'template' => 'solaris-10-x86_64'
-          }
-      },
-      'solaris10-64' => {
-          :general => {
-              'platform'           => 'solaris-10-i386',
-              'packaging_platform' => 'solaris-10-i386'
-          },
-          :vmpooler => {
-              'template' => 'solaris-10-x86_64'
-          }
-      },
-      'solaris10-SPARC' => {
-          :general => {
-              'platform'           => 'solaris-10-sparc',
-              'packaging_platform' => 'solaris-10-sparc'
-          },
-          :abs => {
-              'template' => 'solaris-10-sparc'
-          }
-      },
-      'solaris11-32' => {
-          :general => {
-              'platform'           => 'solaris-11-i386',
-              'packaging_platform' => 'solaris-11-i386'
-          },
-          :vmpooler => {
-              'template' => 'solaris-11-x86_64'
-          }
-      },
-      'solaris11-64' => {
-          :general => {
-              'platform'           => 'solaris-11-i386',
-              'packaging_platform' => 'solaris-11-i386'
-          },
-          :vmpooler => {
-              'template' => 'solaris-11-x86_64'
-          }
-      },
-      'solaris11-SPARC' => {
-          :general => {
-              'platform'           => 'solaris-11-sparc',
-              'packaging_platform' => 'solaris-11-sparc'
-          },
-          :abs => {
-              'template' => 'solaris-11-sparc'
-          }
-      },
-      'solaris112-32' => {
-          :general => {
-              'platform'           => 'solaris-11.2-i386',
-              'packaging_platform' => 'solaris-11-i386'
-          },
-          :vmpooler => {
-              'template' => 'solaris-112-x86_64'
-          }
-      },
-      'solaris112-64' => {
-          :general => {
-              'platform'           => 'solaris-11.2-i386',
-              'packaging_platform' => 'solaris-11-i386'
-          },
-          :vmpooler => {
-              'template' => 'solaris-112-x86_64'
-          }
-      },
-      'solaris114-32' => {
-          :general => {
-              'platform'           => 'solaris-11.4-i386',
-              'packaging_platform' => 'solaris-11-i386'
-          },
-          :vmpooler => {
-              'template' => 'solaris-114-x86_64'
-          }
-      },
-      'solaris114-64' => {
-          :general => {
-              'platform'           => 'solaris-11.4-i386',
-              'packaging_platform' => 'solaris-11-i386'
-          },
-          :vmpooler => {
-              'template' => 'solaris-114-x86_64'
-          }
-      },
-      'ubuntu1004-32' => {
-          :general => {
-              'platform' => 'ubuntu-10.04-i386'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1004-i386'
-          }
-      },
-      'ubuntu1004-64' => {
-          :general => {
-              'platform' => 'ubuntu-10.04-amd64'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1004-x86_64'
-          }
-      },
-      'ubuntu1204-32' => {
-          :general => {
-              'platform' => 'ubuntu-12.04-i386'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1204-i386'
-          }
-      },
-      'ubuntu1204-64' => {
-          :general => {
-              'platform' => 'ubuntu-12.04-amd64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'apt-get install -y net-tools wget',
-                  'locale-gen en_US.UTF-8'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1204-x86_64'
-          }
-      },
-      'ubuntu1404-32' => {
-          :general => {
-              'platform'           => 'ubuntu-14.04-i386',
-              'packaging_platform' => 'ubuntu-14.04-i386'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1404-i386'
-          }
-      },
-      'ubuntu1404-64' => {
-          :general => {
-              'platform'           => 'ubuntu-14.04-amd64',
-              'packaging_platform' => 'ubuntu-14.04-amd64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'rm /usr/sbin/policy-rc.d',
-                  'rm /sbin/initctl; dpkg-divert --rename --remove /sbin/initctl',
-                  'apt-get install -y net-tools wget apt-transport-https',
-                  'locale-gen en_US.UTF-8',
-                  'echo LANG=en_US.UTF-8 > /etc/default/locale'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1404-x86_64'
-          }
-      },
-      'ubuntu1504-32' => {
-          :general => {
-              'platform' => 'ubuntu-15.04-i386'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1504-i386'
-          }
-      },
-      'ubuntu1504-64' => {
-          :general => {
-              'platform' => 'ubuntu-15.04-amd64'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1504-x86_64'
-          }
-      },
-      'ubuntu1510-32' => {
-          :general => {
-              'platform' => 'ubuntu-15.10-i386'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1510-i386'
-          }
-      },
-      'ubuntu1510-64' => {
-          :general => {
-              'platform' => 'ubuntu-15.10-amd64'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1510-x86_64'
-          }
-      },
-      'ubuntu1604-32' => {
-          :general => {
-              'platform'           => 'ubuntu-16.04-i386',
-              'packaging_platform' => 'ubuntu-16.04-i386'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1604-i386'
-          }
-      },
-      'ubuntu1604-64' => {
-          :general => {
-              'platform'           => 'ubuntu-16.04-amd64',
-              'packaging_platform' => 'ubuntu-16.04-amd64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'apt-get install -y net-tools wget locales apt-transport-https',
-                  'locale-gen en_US.UTF-8',
-                  'echo LANG=en_US.UTF-8 > /etc/default/locale'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1604-x86_64'
-          }
-      },
-      'ubuntu1604-POWER' => {
-          :general => {
-              'platform'           => 'ubuntu-16.04-ppc64el',
-              'packaging_platform' => 'ubuntu-16.04-ppc64el'
-          },
-          :abs => {
-              'template' => 'ubuntu-16.04-power8'
-          }
-      },
-      'ubuntu1610-32' => {
-          :general => {
-              'platform' => 'ubuntu-16.10-i386'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1610-i386'
-          }
-      },
-      'ubuntu1610-64' => {
-          :general => {
-              'platform' => 'ubuntu-16.10-amd64'
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1610-x86_64'
-          }
-      },
-      'ubuntu1804-64' => {
-          :general => {
-              'platform'           => 'ubuntu-18.04-amd64',
-              'packaging_platform' => 'ubuntu-18.04-amd64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'apt-get install -y net-tools wget locales apt-transport-https iproute2 gnupg',
-                  'locale-gen en_US.UTF-8',
-                  'echo LANG=en_US.UTF-8 > /etc/default/locale'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1804-x86_64'
-          }
-      },
-      'ubuntu1810-64' => {
-          :general => {
-              'platform'           => 'ubuntu-18.10-amd64',
-              'packaging_platform' => 'ubuntu-18.10-amd64'
-          },
-          :docker => {
-              'docker_image_commands' => [
-                  'cp /bin/true /sbin/agetty',
-                  'apt-get install -y net-tools wget locales apt-transport-https iproute2',
-                  'locale-gen en_US.UTF-8',
-                  'echo LANG=en_US.UTF-8 > /etc/default/locale'
-              ]
-          },
-          :vmpooler => {
-              'template' => 'ubuntu-1810-x86_64'
-          }
-      },
-      'vro6-64' => {
-          :general => {
-              'platform'           => 'sles-11-x86_64',
-              'packaging_platform' => 'sles-11-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'vro-6-x86_64'
-          }
-      },
-      'vro7-64' => {
-          :general => {
-              'platform'           => 'sles-11-x86_64',
-              'packaging_platform' => 'sles-11-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'vro-7-x86_64'
-          }
-      },
-      'vro71-64' => {
-          :general => {
-              'platform'           => 'sles-11-x86_64',
-              'packaging_platform' => 'sles-11-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'vro-71-x86_64'
-          }
-      },
-      'vro73-64' => {
-          :general => {
-              'platform'           => 'sles-11-x86_64',
-              'packaging_platform' => 'sles-11-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'vro-73-x86_64'
-          }
-      },
-      'vro74-64' => {
-          :general => {
-              'platform'           => 'sles-11-x86_64',
-              'packaging_platform' => 'sles-11-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'vro-74-x86_64'
-          }
-      },
-      'windows2008-64' => {
-          :general => {
-              'platform'           => 'windows-2008-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2008-x86_64'
-          }
-      },
-      'windows2008-6432' => {
-          :general => {
-              'platform'           => 'windows-2008-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2008-x86_64'
-          }
-      },
-      'windows2008r2-64' => {
-          :general => {
-              'platform'           => 'windows-2008r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2008r2-x86_64'
-          }
-      },
-      'windows2008r2-6432' => {
-          :general => {
-              'platform'           => 'windows-2008r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2008r2-x86_64'
-          }
-      },
-      'windows2012-64' => {
-          :general => {
-              'platform'           => 'windows-2012-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2012-x86_64'
-          }
-      },
-      'windows2012-6432' => {
-          :general => {
-              'platform'           => 'windows-2012-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2012-x86_64'
-          }
-      },
-      'windows2012r2-64' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-x86_64'
-          }
-      },
-      'windowsfips2012r2-64' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windowsfips-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-fips-x86_64'
-          }
-      },
-      'windowsfips2012r2-6432' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windowsfips-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-fips-x86_64'
-          }
-      },
-      'windows2012r2-6432' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-x86_64'
-          }
-      },
-      'windows2012r2_wmf5-64' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-wmf5-x86_64'
-          }
-      },
-      'windows2012r2_ja-64' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-ja-x86_64',
-              'locale'   => 'ja'
-          }
-      },
-      'windows2012r2_ja-6432' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-ja-x86_64',
-              'locale'   => 'ja'
-          }
-      },
-      'windows2012r2_fr-64' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-fr-x86_64',
-              'user'     => 'Administrateur',
-              'locale'   => 'fr'
-          }
-      },
-      'windows2012r2_fr-6432' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-fr-x86_64',
-              'user'     => 'Administrateur',
-              'locale'   => 'fr'
-          }
-      },
-      'windows2012r2_core-64' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-core-x86_64'
-          }
-      },
-      'windows2012r2_core-6432' => {
-          :general => {
-              'platform'           => 'windows-2012r2-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2012r2-core-x86_64'
-          }
-      },
-      'windows2016-64' => {
-          :general => {
-              'platform'           => 'windows-2016-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2016-x86_64'
-          }
-      },
-      'windows2016-6432' => {
-          :general => {
-              'platform'           => 'windows-2016-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2016-x86_64'
-          }
-      },
-      'windows2016_core-64' => {
-          :general => {
-              'platform'           => 'windows-2016-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2016-core-x86_64'
-          }
-      },
-      'windows2016_core-6432' => {
-          :general => {
-              'platform'           => 'windows-2016-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2016-core-x86_64'
-          }
-      },
-      'windows2016_fr-64' => {
-          :general => {
-              'platform'           => 'windows-2016-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2016-fr-x86_64',
-              'user'     => 'Administrateur',
-              'locale'   => 'fr'
-          }
-      },
-      'windows2016_fr-6432' => {
-          :general => {
-              'platform'           => 'windows-2016-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2016-fr-x86_64',
-              'user'     => 'Administrateur',
-              'locale'   => 'fr'
-          }
-      },
-      'windows2019-64' => {
-          :general => {
-              'platform'           => 'windows-2019-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2019-x86_64'
-          }
-      },
-      'windows2019-6432' => {
-          :general => {
-              'platform'           => 'windows-2019-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2019-x86_64'
-          }
-      },
-      'windows2019_ja-64' => {
-          :general => {
-              'platform'           => 'windows-2019-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2019-ja-x86_64',
-              'locale'   => 'ja'
-          }
-      },
-      'windows2019_ja-6432' => {
-          :general => {
-              'platform'           => 'windows-2019-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2019-ja-x86_64',
-              'locale'   => 'ja'
-          }
-      },
-      'windows2019_fr-64' => {
-          :general => {
-              'platform'           => 'windows-2019-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2019-fr-x86_64',
-              'user'     => 'Administrateur',
-              'locale'   => 'fr'
-          }
-      },
-      'windows2019_fr-6432' => {
-          :general => {
-              'platform'           => 'windows-2019-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2019-fr-x86_64',
-              'user'     => 'Administrateur',
-              'locale'   => 'fr'
-          }
-      },
-      'windows2019_core-64' => {
-          :general => {
-              'platform'           => 'windows-2019-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-2019-core-x86_64'
-          }
-      },
-      'windows2019_core-6432' => {
-          :general => {
-              'platform'           => 'windows-2019-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-2019-core-x86_64'
-          }
-      },
-      'windows7-64' => {
-          :general => {
-              'platform'           => 'windows-7-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-7-x86_64'
-          }
-      },
-      'windows81-64' => {
-          :general => {
-              'platform'           => 'windows-8.1-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-81-x86_64'
-          }
-      },
-      'windows10ent-32' => {
-          :general => {
-              'platform'           => 'windows-10ent-32',
-              'packaging_platform' => 'windows-2012-x86',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-10-ent-i386'
-          }
-      },
-      'windows10ent-64' => {
-          :general => {
-              'platform'           => 'windows-10ent-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-10-ent-x86_64'
-          }
-      },
-      'windows10next-32' => {
-          :general => {
-              'platform'           => 'windows-10ent-32',
-              'packaging_platform' => 'windows-2012-x86',
-              'ruby_arch' => 'x86'
-          },
-          :vmpooler => {
-              'template' => 'win-10-next-i386'
-          }
-      },
-      'windows10next-64' => {
-          :general => {
-              'platform'           => 'windows-10ent-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-10-next-x86_64'
-          }
-      },
-      'windows10pro-64' => {
-          :general => {
-              'platform'           => 'windows-10pro-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-10-pro-x86_64'
-          }
-      },
-      'windows10_1511-64' => {
-          :general => {
-              'platform'           => 'windows-10ent-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-10-1511-x86_64'
-          }
-      },
-      'windows10_1607-64' => {
-          :general => {
-              'platform'           => 'windows-10ent-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-10-1607-x86_64'
-          }
-      },
-      'windows10_1809-64' => {
-          :general => {
-              'platform'           => 'windows-10ent-64',
-              'packaging_platform' => 'windows-2012-x64',
-              'ruby_arch' => 'x64'
-          },
-          :vmpooler => {
-              'template' => 'win-10-1809-x86_64'
-          }
-      }
-  }
+    {
+        'aix53-POWER' => {
+            :general => {
+                'platform'           => 'aix-5.3-power',
+                'packaging_platform' => 'aix-5.3-power'
+            },
+            :abs => {
+                'template' => 'aix-5.3-power'
+            }
+        },
+        'aix61-POWER' => {
+            :general => {
+                'platform'           => 'aix-6.1-power',
+                'packaging_platform' => 'aix-6.1-power'
+            },
+            :abs => {
+                'template' => 'aix-6.1-power'
+            }
+        },
+        'aix71-POWER' => {
+            :general => {
+                'platform'           => 'aix-7.1-power',
+                'packaging_platform' => 'aix-7.1-power'
+            },
+            :abs => {
+                'template' => 'aix-7.1-power'
+            }
+        },
+        'aix72-POWER' => {
+            :general => {
+                'platform'           => 'aix-7.2-power',
+                'packaging_platform' => 'aix-7.1-power'
+            },
+            :abs => {
+                'template' => 'aix-7.2-power'
+            }
+        },
+        'amazon6-64' => {
+            :general => {
+                'platform'           => 'el-6-x86_64',
+                'packaging_platform' => 'el-6-x86_64'
+            },
+            :abs => {
+                'template' => 'amazon-6-x86_64'
+            }
+        },
+        'amazon7-64' => {
+            :general => {
+                'platform'           => 'el-7-x86_64',
+                'packaging_platform' => 'el-7-x86_64'
+            },
+            :abs => {
+                'template' => 'amazon-7-x86_64'
+            }
+        },
+        'amazon7-ARM64' => {
+            :general => {
+                'platform'           => 'el-7-aarch64',
+                'packaging_platform' => 'el-7-aarch64'
+            },
+            :abs => {
+                'template' => 'amazon-7-arm64'
+            }
+        },
+        'arista4-32' => {
+            :general => {
+                'platform'           => 'eos-4-i386',
+                'packaging_platform' => 'eos-4-i386'
+            },
+            :vmpooler => {
+                'template' => 'arista-4-i386'
+            }
+        },
+        'centos4-32' => {
+            :general => {
+                'platform' => 'el-4-i386'
+            },
+            :vmpooler => {
+                'template' => 'centos-4-i386'
+            }
+        },
+        'centos4-64' => {
+            :general => {
+                'platform' => 'el-4-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'centos-4-x86_64'
+            }
+        },
+        'centos5-32' => {
+            :general => {
+                'platform'           => 'el-5-i386',
+                'packaging_platform' => 'el-5-i386'
+            },
+            :vmpooler => {
+                'template' => 'centos-5-i386'
+            }
+        },
+        'centos5-64' => {
+            :general => {
+                'platform'           => 'el-5-x86_64',
+                'packaging_platform' => 'el-5-x86_64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/mingetty',
+                    'yum install -y crontabs initscripts iproute openssl sysvinit-tools tar wget which',
+                    'sed -i -e "/mingetty/d" /etc/inittab'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'centos-5-x86_64'
+            }
+        },
+        'centos6-32' => {
+            :general => {
+                'platform'           => 'el-6-i386',
+                'packaging_platform' => 'el-6-i386'
+            },
+            :vmpooler => {
+                'template' => 'centos-6-i386'
+            }
+        },
+        'centos6-64' => {
+            :general => {
+                'platform'           => 'el-6-x86_64',
+                'packaging_platform' => 'el-6-x86_64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/mingetty',
+                    'rm -rf /var/run/network/*',
+                    'yum install -y crontabs initscripts iproute openssl sysvinit-tools tar wget which',
+                    'rm /etc/init/tty.conf'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'centos-6-x86_64'
+            }
+        },
+        'centos7-64' => {
+            :general => {
+                'platform'           => 'el-7-x86_64',
+                'packaging_platform' => 'el-7-x86_64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'yum install -y crontabs initscripts iproute openssl sysvinit-tools tar wget which ss'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'centos-7-x86_64'
+            }
+        },
+        'centos8-64' => {
+            :general => {
+                'platform'           => 'el-8-x86_64',
+                'packaging_platform' => 'el-8-x86_64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'yum install -y crontabs initscripts iproute openssl wget which'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'centos-8-x86_64'
+            }
+        },
+        # Deprecated
+        'cisconx-64' => {
+            :general => {
+                'platform'           => 'cisco_nexus-7-x86_64',
+                'packaging_platform' => 'cisco-wrlinux-5-x86_64',
+                'vrf' => 'management',
+                'ssh' => {
+                    'user' => 'beaker'
+                }
+            },
+            :vmpooler => {
+                'template' => 'cisco-nxos-9k-x86_64'
+            }
+        },
+        # Deprecated
+        'ciscon7k-64' => {
+            :general => {
+                'platform'           => 'cisco_nexus-7k-x86_64',
+                'packaging_platform' => 'cisco-wrlinux-5-x86_64',
+                'vrf' => 'management',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-n7k-7k-x86_64'
+            }
+        },
+        # Deprecated
+        'cisconxhw-64' => {
+            :general => {
+                'platform'           => 'cisco_nexus-7-x86_64',
+                'packaging_platform' => 'cisco-wrlinux-5-x86_64',
+                'vrf' => 'management',
+                'ssh' => {
+                    'user' => 'devops'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-nxos_hw-9k-x86_64'
+            }
+        },
+        'cisco_n9k-VM' => {
+            :general => {
+                'platform'           => 'cisco_nexus-7-x86_64',
+                'packaging_platform' => 'cisco-wrlinux-5-x86_64',
+                'vrf' => 'management',
+                'ssh' => {
+                    'user' => 'beaker'
+                }
+            },
+            :vmpooler => {
+                'template' => 'cisco-nxos-9k-x86_64'
+            }
+        },
+        'cisco_n7k-HW' => {
+            :general => {
+                'platform'           => 'cisco_nexus-7k-x86_64',
+                'packaging_platform' => 'cisco-wrlinux-5-x86_64',
+                'vrf' => 'management',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-n7k-x86_64'
+            }
+        },
+        'cisco_n7k_vdc-HW' => {
+            :general => {
+                'platform'           => 'cisco_nexus-7k-x86_64',
+                'packaging_platform' => 'cisco-wrlinux-5-x86_64',
+                'vrf' => 'management',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-n7k_vdc-x86_64'
+            }
+        },
+        'cisco_n9k-HW' => {
+            :general => {
+                'platform'           => 'cisco_nexus-7-x86_64',
+                'packaging_platform' => 'cisco-wrlinux-5-x86_64',
+                'vrf' => 'management',
+                'ssh' => {
+                    'user' => 'devops'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-n9k-x86_64'
+            }
+        },
+        'cisco_ios_c2960-HW' => {
+            :general => {
+                'platform' => 'cisco_ios-12-arm32',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-ios_c2960-arm'
+            }
+        },
+        'cisco_ios_c3560-HW' => {
+            :general => {
+                'platform' => 'cisco_ios-12-arm32',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-ios_c3560-arm'
+            }
+        },
+        'cisco_ios_c3750-HW' => {
+            :general => {
+                'platform' => 'cisco_ios-12-arm32',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-ios_c3750-arm'
+            }
+        },
+        'cisco_ios_c4507r-HW' => {
+            :general => {
+                'platform' => 'cisco_ios-12-arm32',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-ios_c4507r-arm'
+            }
+        },
+        'cisco_ios_c4948-HW' => {
+            :general => {
+                'platform' => 'cisco_ios-12-arm32',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-ios_c4948-arm'
+            }
+        },
+        'cisco_ios_c6503-HW' => {
+            :general => {
+                'platform' => 'cisco_ios-12-arm32',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-ios_c6503-arm'
+            }
+        },
+        'cisco_iosxe_c3650-HW' => {
+            :general => {
+                'platform' => 'cisco_iosxec3650-arm32',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-iosxe_c3650-arm'
+            }
+        },
+        'cisco_iosxe_c4503-HW' => {
+            :general => {
+                'platform' => 'cisco_iosxe-3-arm32',
+                'ssh' => {
+                    'user' => 'admin'
+                }
+            },
+            :abs => {
+                'template' => 'cisco-iosxe_c4503-arm'
+            }
+        },
+        'cisco_xr_9k-VM' => {
+            :general => {
+                'platform'           => 'cisco_ios_xr-6-x86_64',
+                'packaging_platform' => 'cisco-wrlinux-7-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'cisco-exr-9k-x86_64'
+            }
+        },
+        'cumulus25-64' => {
+            :general => {
+                'platform'           => 'cumulus-2.5-x86_64',
+                'packaging_platform' => 'cumulus-2.2-amd64'
+            },
+            :vmpooler => {
+                'template' => 'cumulus-vx-25-x86_64'
+            }
+        },
+        'debian6-32' => {
+            :general => {
+                'platform' => 'debian-6-i386'
+            },
+            :vmpooler => {
+                'template' => 'debian-6-i386'
+            }
+        },
+        'debian6-64' => {
+            :general => {
+                'platform' => 'debian-6-amd64'
+            },
+            :vmpooler => {
+                'template' => 'debian-6-x86_64'
+            }
+        },
+        'debian7-32' => {
+            :general => {
+                'platform'           => 'debian-7-i386',
+                'packaging_platform' => 'debian-7-i386'
+            },
+            :vmpooler => {
+                'template' => 'debian-7-i386'
+            }
+        },
+        'debian7-64' => {
+            :general => {
+                'platform'           => 'debian-7-amd64',
+                'packaging_platform' => 'debian-7-amd64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/getty',
+                    'apt-get update && apt-get install -y cron locales-all net-tools wget'
+                ],
+            },
+            :vagrant => {
+                'box' => 'debian/wheezy64',
+            },
+            :vmpooler => {
+                'template' => 'debian-7-x86_64'
+            }
+        },
+        'debian8-32' => {
+            :general => {
+                'platform'           => 'debian-8-i386',
+                'packaging_platform' => 'debian-8-i386'
+            },
+            :vmpooler => {
+                'template' => 'debian-8-i386'
+            }
+        },
+        'debian8-64' => {
+            :general => {
+                'platform'           => 'debian-8-amd64',
+                'packaging_platform' => 'debian-8-amd64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'rm -f /usr/sbin/policy-rc.d',
+                    'apt-get update && apt-get install -y cron locales-all net-tools wget'
+                ]
+            },
+            :vagrant => {
+                'box' => 'debian/jessie64',
+            },
+            :vmpooler => {
+                'template' => 'debian-8-x86_64'
+            }
+        },
+        'debian9-32' => {
+            :general => {
+                'platform'           => 'debian-9-i386',
+                'packaging_platform' => 'debian-9-i386'
+            },
+            :vmpooler => {
+                'template' => 'debian-9-i386'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'rm -f /usr/sbin/policy-rc.d',
+                    'apt-get update && apt-get install -y cron locales-all net-tools wget'
+                ]
+            }
+        },
+        'debian9-64' => {
+            :general => {
+                'platform'           => 'debian-9-amd64',
+                'packaging_platform' => 'debian-9-amd64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'rm -f /usr/sbin/policy-rc.d',
+                    'apt-get update && apt-get install -y cron locales-all net-tools wget systemd-sysv gnupg'
+                ]
+            },
+            :vagrant => {
+                'box' => 'debian/stretch64',
+            },
+            :vmpooler => {
+                'template' => 'debian-9-x86_64'
+            }
+        },
+        'debian10-64' => {
+            :general => {
+                'platform'           => 'debian-10-amd64',
+                'packaging_platform' => 'debian-10-amd64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'rm -f /usr/sbin/policy-rc.d',
+                    'apt-get update && apt-get install -y cron locales-all net-tools wget gnupg'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'debian-10-x86_64'
+            }
+        },
+        'debian10-32' => {
+            :general => {
+                'platform'           => 'debian-10-i386',
+                'packaging_platform' => 'debian-10-i386'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'rm -f /usr/sbin/policy-rc.d',
+                    'apt-get update && apt-get install -y cron locales-all net-tools wget gnupg'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'debian-10-i386'
+            }
+        },
+        'fedora14-32' => {
+            :general => {
+                'platform' => 'fedora-14-i386'
+            },
+            :vmpooler => {
+                'template' => 'fedora-14-i386'
+            }
+        },
+        'fedora19-32' => {
+            :general => {
+                'platform' => 'fedora-19-i386'
+            },
+            :vmpooler => {
+                'template' => 'fedora-19-i386'
+            }
+        },
+        'fedora19-64' => {
+            :general => {
+                'platform' => 'fedora-19-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-19-x86_64'
+            }
+        },
+        'fedora20-32' => {
+            :general => {
+                'platform' => 'fedora-20-i386'
+            },
+            :vmpooler => {
+                'template' => 'fedora-20-i386'
+            }
+        },
+        'fedora20-64' => {
+            :general => {
+                'platform' => 'fedora-20-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-20-x86_64'
+            }
+        },
+        'fedora21-32' => {
+            :general => {
+                'platform' => 'fedora-21-i386'
+            },
+            :vmpooler => {
+                'template' => 'fedora-21-i386'
+            }
+        },
+        'fedora21-64' => {
+            :general => {
+                'platform' => 'fedora-21-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-21-x86_64'
+            }
+        },
+        'fedora22-32' => {
+            :general => {
+                'platform' => 'fedora-22-i386'
+            },
+            :vmpooler => {
+                'template' => 'fedora-22-i386'
+            }
+        },
+        'fedora22-64' => {
+            :general => {
+                'platform' => 'fedora-22-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-22-x86_64'
+            }
+        },
+        'fedora23-32' => {
+            :general => {
+                'platform' => 'fedora-23-i386'
+            },
+            :vmpooler => {
+                'template' => 'fedora-23-i386'
+            }
+        },
+        'fedora23-64' => {
+            :general => {
+                'platform' => 'fedora-23-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-23-x86_64'
+            }
+        },
+        'fedora24-32' => {
+            :general => {
+                'platform'           => 'fedora-24-i386',
+                'packaging_platform' => 'fedora-24-i386'
+            },
+            :vmpooler => {
+                'template' => 'fedora-24-i386'
+            }
+        },
+        'fedora24-64' => {
+            :general => {
+                'platform'           => 'fedora-24-x86_64',
+                'packaging_platform' => 'fedora-24-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-24-x86_64'
+            }
+        },
+        'fedora25-32' => {
+            :general => {
+                'platform'           => 'fedora-25-i386',
+                'packaging_platform' => 'fedora-25-i386'
+            },
+            :vmpooler => {
+                'template' => 'fedora-25-i386'
+            }
+        },
+        'fedora25-64' => {
+            :general => {
+                'platform'           => 'fedora-25-x86_64',
+                'packaging_platform' => 'fedora-25-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-25-x86_64'
+            }
+        },
+        'fedora26-64' => {
+            :general => {
+                'platform'           => 'fedora-26-x86_64',
+                'packaging_platform' => 'fedora-26-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-26-x86_64'
+            }
+        },
+        'fedora27-64' => {
+            :general => {
+                'platform'           => 'fedora-27-x86_64',
+                'packaging_platform' => 'fedora-27-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-27-x86_64'
+            }
+        },
+        'fedora28-64' => {
+            :general => {
+                'platform'           => 'fedora-28-x86_64',
+                'packaging_platform' => 'fedora-28-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-28-x86_64'
+            }
+        },
+        'fedora29-64' => {
+            :general => {
+                'platform'           => 'fedora-29-x86_64',
+                'packaging_platform' => 'fedora-29-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-29-x86_64'
+            }
+        },
+        'fedora30-64' => {
+            :general => {
+                'platform'           => 'fedora-30-x86_64',
+                'packaging_platform' => 'fedora-30-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-30-x86_64'
+            }
+        },
+        'fedora31-64' => {
+            :general => {
+                'platform'           => 'fedora-31-x86_64',
+                'packaging_platform' => 'fedora-31-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'fedora-31-x86_64'
+            }
+        },
+        'huaweios6-POWER' => {
+            :general => {
+                'platform' => 'huaweios-6-powerpc'
+            },
+            :abs => {
+                'template' => 'huaweios-6-powerpc'
+            }
+        },
+        'panos61-64' => {
+            :general => {
+                'platform' => 'palo-alto-6.1.0-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'palo-alto-6.1.0-x86_64'
+            }
+        },
+        'panos71-64' => {
+            :general => {
+                'platform' => 'palo-alto-7.1.0-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'palo-alto-7.1.0-x86_64'
+            }
+        },
+        'panos81-64' => {
+            :general => {
+                'platform' => 'palo-alto-8.1.0-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'palo-alto-8.1.0-x86_64'
+            }
+        },
+        'opensuse11-32' => {
+            :general => {
+                'platform' => 'opensuse-11-i386'
+            },
+            :vmpooler => {
+                'template' => 'opensuse-11-i386'
+            }
+        },
+        'opensuse11-64' => {
+            :general => {
+                'platform' => 'opensuse-11-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'opensuse-11-x86_64'
+            }
+        },
+        'oracle5-32' => {
+            :general => {
+                'platform'           => 'el-5-i386',
+                'packaging_platform' => 'el-5-i386'
+            },
+            :vmpooler => {
+                'template' => 'oracle-5-i386'
+            }
+        },
+        'oracle5-64' => {
+            :general => {
+                'platform'           => 'el-5-x86_64',
+                'packaging_platform' => 'el-5-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'oracle-5-x86_64'
+            }
+        },
+        'oracle6-32' => {
+            :general => {
+                'platform'           => 'el-6-i386',
+                'packaging_platform' => 'el-6-i386'
+            },
+            :vmpooler => {
+                'template' => 'oracle-6-i386'
+            }
+        },
+        'oracle6-64' => {
+            :general => {
+                'platform'           => 'el-6-x86_64',
+                'packaging_platform' => 'el-6-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'oracle-6-x86_64'
+            }
+        },
+        'oracle7-64' => {
+            :general => {
+                'platform'           => 'el-7-x86_64',
+                'packaging_platform' => 'el-7-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'oracle-7-x86_64'
+            }
+        },
+        'osx109-64' => {
+            :general => {
+                'platform' => 'osx-10.9-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'osx-109-x86_64'
+            }
+        },
+        'osx1010-64' => {
+            :general => {
+                'platform'           => 'osx-10.10-x86_64',
+                'packaging_platform' => 'osx-10.10-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'osx-1010-x86_64'
+            }
+        },
+        'osx1011-64' => {
+            :general => {
+                'platform'           => 'osx-10.11-x86_64',
+                'packaging_platform' => 'osx-10.11-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'osx-1011-x86_64'
+            }
+        },
+        'osx1012-64' => {
+            :general => {
+                'platform'           => 'osx-10.12-x86_64',
+                'packaging_platform' => 'osx-10.12-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'osx-1012-x86_64'
+            }
+        },
+        'osx1013-64' => {
+            :general => {
+                'platform'           => 'osx-10.13-x86_64',
+                'packaging_platform' => 'osx-10.13-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'osx-1013-x86_64'
+            }
+        },
+        'osx1014-64' => {
+            :general => {
+                'platform'           => 'osx-10.14-x86_64',
+                'packaging_platform' => 'osx-10.14-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'osx-1014-x86_64'
+            }
+        },
+        'osx1015-64' => {
+            :general => {
+                'platform'           => 'osx-10.15-x86_64',
+                'packaging_platform' => 'osx-10.15-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'osx-1015-x86_64'
+            }
+        },
+        'redhat4-32' => {
+            :general => {
+                'platform' => 'el-4-i386'
+            },
+            :vmpooler => {
+                'template' => 'redhat-4-i386'
+            }
+        },
+        'redhat4-64' => {
+            :general => {
+                'platform' => 'el-4-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'redhat-4-x86_64'
+            }
+        },
+        'redhat5-32' => {
+            :general => {
+                'platform'          => 'el-5-i386',
+                'packaging_platform' => 'el-5-i386'
+            },
+            :vmpooler => {
+                'template' => 'redhat-5-i386'
+            }
+        },
+        'redhat5-64' => {
+            :general => {
+                'platform'          => 'el-5-x86_64',
+                'packaging_platform' => 'el-5-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'redhat-5-x86_64'
+            }
+        },
+        'redhat6-32' => {
+            :general => {
+                'platform'          => 'el-6-i386',
+                'packaging_platform' => 'el-6-i386'
+            },
+            :vmpooler => {
+                'template' => 'redhat-6-i386'
+            }
+        },
+        'redhat6-64' => {
+            :general => {
+                'platform'           => 'el-6-x86_64',
+                'packaging_platform' => 'el-6-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'redhat-6-x86_64'
+            }
+        },
+        'redhat6-S390X' => {
+            :general => {
+                'platform'          => 'el-6-s390x',
+                'packaging_platform' => 'el-6-s390x'
+            },
+        },
+        'redhat7-64' => {
+            :general => {
+                'platform'           => 'el-7-x86_64',
+                'packaging_platform' => 'el-7-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'redhat-7-x86_64'
+            }
+        },
+        'redhatfips7-64' => {
+            :general => {
+                'platform'           => 'el-7-x86_64',
+                'packaging_platform' => 'redhatfips-7-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'redhat-fips-7-x86_64'
+            }
+        },
+        'redhat7-POWER' => {
+            :general => {
+                'platform'           => 'el-7-ppc64le',
+                'packaging_platform' => 'el-7-ppc64le'
+            },
+            :abs => {
+                'template' => 'redhat-7.3-power8'
+            }
+        },
+        'redhat7-S390X' => {
+            :general => {
+                'platform'           => 'el-7-s390x',
+                'packaging_platform' => 'el-7-s390x'
+            },
+        },
+        'redhat7-AARCH64' => {
+            :general => {
+                'platform'           => 'el-7-aarch64',
+                'packaging_platform' => 'el-7-aarch64'
+            },
+            :abs => {
+                'template' => 'centos-7-arm64'
+            },
+            :vmpooler => {
+                'template' => 'redhat-7-x86_64'
+            }
+        },
+        'redhat8-64' => {
+            :general => {
+                'platform'           => 'el-8-x86_64',
+                'packaging_platform' => 'el-8-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'redhat-8-x86_64'
+            }
+        },
+        'scientific5-32' => {
+            :general => {
+                'platform'           => 'el-5-i386',
+                'packaging_platform' => 'el-5-i386'
+            },
+            :vmpooler => {
+                'template' => 'scientific-5-i386'
+            }
+        },
+        'scientific5-64' => {
+            :general => {
+                'platform'           => 'el-5-x86_64',
+                'packaging_platform' => 'el-5-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'scientific-5-x86_64'
+            }
+        },
+        'scientific6-32' => {
+            :general => {
+                'platform'          => 'el-6-i386',
+                'packaging_platform' => 'el-6-i386'
+            },
+            :vmpooler => {
+                'template' => 'scientific-6-i386'
+            }
+        },
+        'scientific6-64' => {
+            :general => {
+                'platform'           => 'el-6-x86_64',
+                'packaging_platform' => 'el-6-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'scientific-6-x86_64'
+            }
+        },
+        'scientific7-64' => {
+            :general => {
+                'platform'          => 'el-7-x86_64',
+                'packaging_platform' => 'el-7-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'scientific-7-x86_64'
+            }
+        },
+        'sles10-32' => {
+            :general => {
+                'platform' => 'sles-10-i386'
+            },
+            :vmpooler => {
+                'template' => 'sles-10-i386'
+            }
+        },
+        'sles10-64' => {
+            :general => {
+                'platform' => 'sles-10-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'sles-10-x86_64'
+            }
+        },
+        'sles11-32' => {
+            :general => {
+                'platform'           => 'sles-11-i386',
+                'packaging_platform' => 'sles-11-i386'
+            },
+            :vmpooler => {
+                'template' => 'sles-11-i386'
+            }
+        },
+        'sles11-64' => {
+            :general => {
+                'platform'           => 'sles-11-x86_64',
+                'packaging_platform' => 'sles-11-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'sles-11-x86_64'
+            }
+        },
+        'sles11-S390X' => {
+            :general => {
+                'platform'           => 'sles-11-s390x',
+                'packaging_platform' => 'sles-11-s390x'
+            },
+        },
+        'sles12-64' => {
+            :general => {
+                'platform'           => 'sles-12-x86_64',
+                'packaging_platform' => 'sles-12-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'sles-12-x86_64'
+            }
+        },
+        'sles12-S390X' => {
+            :general => {
+                'platform'           => 'sles-12-s390x',
+                'packaging_platform' => 'sles-12-s390x'
+            }
+        },
+        'sles12-POWER' => {
+            :general => {
+                'platform'           => 'sles-12-ppc64le',
+                'packaging_platform' => 'sles-12-ppc64le'
+            },
+            :abs => {
+                'template' => 'sles-12-power8'
+            }
+        },
+        'sles15-64' => {
+            :general => {
+                'platform'           => 'sles-15-x86_64',
+                'packaging_platform' => 'sles-15-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'sles-15-x86_64'
+            }
+        },
+        'solaris10-32' => {
+            :general => {
+                'platform'           => 'solaris-10-i386',
+                'packaging_platform' => 'solaris-10-i386'
+            },
+            :vmpooler => {
+                'template' => 'solaris-10-x86_64'
+            }
+        },
+        'solaris10-64' => {
+            :general => {
+                'platform'           => 'solaris-10-i386',
+                'packaging_platform' => 'solaris-10-i386'
+            },
+            :vmpooler => {
+                'template' => 'solaris-10-x86_64'
+            }
+        },
+        'solaris10-SPARC' => {
+            :general => {
+                'platform'           => 'solaris-10-sparc',
+                'packaging_platform' => 'solaris-10-sparc'
+            },
+            :abs => {
+                'template' => 'solaris-10-sparc'
+            }
+        },
+        'solaris11-32' => {
+            :general => {
+                'platform'           => 'solaris-11-i386',
+                'packaging_platform' => 'solaris-11-i386'
+            },
+            :vmpooler => {
+                'template' => 'solaris-11-x86_64'
+            }
+        },
+        'solaris11-64' => {
+            :general => {
+                'platform'           => 'solaris-11-i386',
+                'packaging_platform' => 'solaris-11-i386'
+            },
+            :vmpooler => {
+                'template' => 'solaris-11-x86_64'
+            }
+        },
+        'solaris11-SPARC' => {
+            :general => {
+                'platform'           => 'solaris-11-sparc',
+                'packaging_platform' => 'solaris-11-sparc'
+            },
+            :abs => {
+                'template' => 'solaris-11-sparc'
+            }
+        },
+        'solaris112-32' => {
+            :general => {
+                'platform'           => 'solaris-11.2-i386',
+                'packaging_platform' => 'solaris-11-i386'
+            },
+            :vmpooler => {
+                'template' => 'solaris-112-x86_64'
+            }
+        },
+        'solaris112-64' => {
+            :general => {
+                'platform'           => 'solaris-11.2-i386',
+                'packaging_platform' => 'solaris-11-i386'
+            },
+            :vmpooler => {
+                'template' => 'solaris-112-x86_64'
+            }
+        },
+        'solaris114-32' => {
+            :general => {
+                'platform'           => 'solaris-11.4-i386',
+                'packaging_platform' => 'solaris-11-i386'
+            },
+            :vmpooler => {
+                'template' => 'solaris-114-x86_64'
+            }
+        },
+        'solaris114-64' => {
+            :general => {
+                'platform'           => 'solaris-11.4-i386',
+                'packaging_platform' => 'solaris-11-i386'
+            },
+            :vmpooler => {
+                'template' => 'solaris-114-x86_64'
+            }
+        },
+        'ubuntu1004-32' => {
+            :general => {
+                'platform' => 'ubuntu-10.04-i386'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1004-i386'
+            }
+        },
+        'ubuntu1004-64' => {
+            :general => {
+                'platform' => 'ubuntu-10.04-amd64'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1004-x86_64'
+            }
+        },
+        'ubuntu1204-32' => {
+            :general => {
+                'platform' => 'ubuntu-12.04-i386'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1204-i386'
+            }
+        },
+        'ubuntu1204-64' => {
+            :general => {
+                'platform' => 'ubuntu-12.04-amd64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'apt-get install -y net-tools wget',
+                    'locale-gen en_US.UTF-8'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1204-x86_64'
+            }
+        },
+        'ubuntu1404-32' => {
+            :general => {
+                'platform'           => 'ubuntu-14.04-i386',
+                'packaging_platform' => 'ubuntu-14.04-i386'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1404-i386'
+            }
+        },
+        'ubuntu1404-64' => {
+            :general => {
+                'platform'           => 'ubuntu-14.04-amd64',
+                'packaging_platform' => 'ubuntu-14.04-amd64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'rm /usr/sbin/policy-rc.d',
+                    'rm /sbin/initctl; dpkg-divert --rename --remove /sbin/initctl',
+                    'apt-get install -y net-tools wget apt-transport-https',
+                    'locale-gen en_US.UTF-8',
+                    'echo LANG=en_US.UTF-8 > /etc/default/locale'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1404-x86_64'
+            }
+        },
+        'ubuntu1504-32' => {
+            :general => {
+                'platform' => 'ubuntu-15.04-i386'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1504-i386'
+            }
+        },
+        'ubuntu1504-64' => {
+            :general => {
+                'platform' => 'ubuntu-15.04-amd64'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1504-x86_64'
+            }
+        },
+        'ubuntu1510-32' => {
+            :general => {
+                'platform' => 'ubuntu-15.10-i386'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1510-i386'
+            }
+        },
+        'ubuntu1510-64' => {
+            :general => {
+                'platform' => 'ubuntu-15.10-amd64'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1510-x86_64'
+            }
+        },
+        'ubuntu1604-32' => {
+            :general => {
+                'platform'           => 'ubuntu-16.04-i386',
+                'packaging_platform' => 'ubuntu-16.04-i386'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1604-i386'
+            }
+        },
+        'ubuntu1604-64' => {
+            :general => {
+                'platform'           => 'ubuntu-16.04-amd64',
+                'packaging_platform' => 'ubuntu-16.04-amd64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'apt-get install -y net-tools wget locales apt-transport-https',
+                    'locale-gen en_US.UTF-8',
+                    'echo LANG=en_US.UTF-8 > /etc/default/locale'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1604-x86_64'
+            }
+        },
+        'ubuntu1604-POWER' => {
+            :general => {
+                'platform'           => 'ubuntu-16.04-ppc64el',
+                'packaging_platform' => 'ubuntu-16.04-ppc64el'
+            },
+            :abs => {
+                'template' => 'ubuntu-16.04-power8'
+            }
+        },
+        'ubuntu1610-32' => {
+            :general => {
+                'platform' => 'ubuntu-16.10-i386'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1610-i386'
+            }
+        },
+        'ubuntu1610-64' => {
+            :general => {
+                'platform' => 'ubuntu-16.10-amd64'
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1610-x86_64'
+            }
+        },
+        'ubuntu1804-64' => {
+            :general => {
+                'platform'           => 'ubuntu-18.04-amd64',
+                'packaging_platform' => 'ubuntu-18.04-amd64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'apt-get install -y net-tools wget locales apt-transport-https iproute2 gnupg',
+                    'locale-gen en_US.UTF-8',
+                    'echo LANG=en_US.UTF-8 > /etc/default/locale'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1804-x86_64'
+            }
+        },
+        'ubuntu1810-64' => {
+            :general => {
+                'platform'           => 'ubuntu-18.10-amd64',
+                'packaging_platform' => 'ubuntu-18.10-amd64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'apt-get install -y net-tools wget locales apt-transport-https iproute2',
+                    'locale-gen en_US.UTF-8',
+                    'echo LANG=en_US.UTF-8 > /etc/default/locale'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-1810-x86_64'
+            }
+        },
+        'vro6-64' => {
+            :general => {
+                'platform'           => 'sles-11-x86_64',
+                'packaging_platform' => 'sles-11-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'vro-6-x86_64'
+            }
+        },
+        'vro7-64' => {
+            :general => {
+                'platform'           => 'sles-11-x86_64',
+                'packaging_platform' => 'sles-11-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'vro-7-x86_64'
+            }
+        },
+        'vro71-64' => {
+            :general => {
+                'platform'           => 'sles-11-x86_64',
+                'packaging_platform' => 'sles-11-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'vro-71-x86_64'
+            }
+        },
+        'vro73-64' => {
+            :general => {
+                'platform'           => 'sles-11-x86_64',
+                'packaging_platform' => 'sles-11-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'vro-73-x86_64'
+            }
+        },
+        'vro74-64' => {
+            :general => {
+                'platform'           => 'sles-11-x86_64',
+                'packaging_platform' => 'sles-11-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'vro-74-x86_64'
+            }
+        },
+        'windows2008-64' => {
+            :general => {
+                'platform'           => 'windows-2008-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2008-x86_64'
+            }
+        },
+        'windows2008-6432' => {
+            :general => {
+                'platform'           => 'windows-2008-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2008-x86_64'
+            }
+        },
+        'windows2008r2-64' => {
+            :general => {
+                'platform'           => 'windows-2008r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2008r2-x86_64'
+            }
+        },
+        'windows2008r2-6432' => {
+            :general => {
+                'platform'           => 'windows-2008r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2008r2-x86_64'
+            }
+        },
+        'windows2012-64' => {
+            :general => {
+                'platform'           => 'windows-2012-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2012-x86_64'
+            }
+        },
+        'windows2012-6432' => {
+            :general => {
+                'platform'           => 'windows-2012-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2012-x86_64'
+            }
+        },
+        'windows2012r2-64' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-x86_64'
+            }
+        },
+        'windowsfips2012r2-64' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windowsfips-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-fips-x86_64'
+            }
+        },
+        'windowsfips2012r2-6432' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windowsfips-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-fips-x86_64'
+            }
+        },
+        'windows2012r2-6432' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-x86_64'
+            }
+        },
+        'windows2012r2_wmf5-64' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-wmf5-x86_64'
+            }
+        },
+        'windows2012r2_ja-64' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-ja-x86_64',
+                'locale'   => 'ja'
+            }
+        },
+        'windows2012r2_ja-6432' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-ja-x86_64',
+                'locale'   => 'ja'
+            }
+        },
+        'windows2012r2_fr-64' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-fr-x86_64',
+                'user'     => 'Administrateur',
+                'locale'   => 'fr'
+            }
+        },
+        'windows2012r2_fr-6432' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-fr-x86_64',
+                'user'     => 'Administrateur',
+                'locale'   => 'fr'
+            }
+        },
+        'windows2012r2_core-64' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-core-x86_64'
+            }
+        },
+        'windows2012r2_core-6432' => {
+            :general => {
+                'platform'           => 'windows-2012r2-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2012r2-core-x86_64'
+            }
+        },
+        'windows2016-64' => {
+            :general => {
+                'platform'           => 'windows-2016-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2016-x86_64'
+            }
+        },
+        'windows2016-6432' => {
+            :general => {
+                'platform'           => 'windows-2016-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2016-x86_64'
+            }
+        },
+        'windows2016_core-64' => {
+            :general => {
+                'platform'           => 'windows-2016-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2016-core-x86_64'
+            }
+        },
+        'windows2016_core-6432' => {
+            :general => {
+                'platform'           => 'windows-2016-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2016-core-x86_64'
+            }
+        },
+        'windows2016_fr-64' => {
+            :general => {
+                'platform'           => 'windows-2016-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2016-fr-x86_64',
+                'user'     => 'Administrateur',
+                'locale'   => 'fr'
+            }
+        },
+        'windows2016_fr-6432' => {
+            :general => {
+                'platform'           => 'windows-2016-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2016-fr-x86_64',
+                'user'     => 'Administrateur',
+                'locale'   => 'fr'
+            }
+        },
+        'windows2019-64' => {
+            :general => {
+                'platform'           => 'windows-2019-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2019-x86_64'
+            }
+        },
+        'windows2019-6432' => {
+            :general => {
+                'platform'           => 'windows-2019-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2019-x86_64'
+            }
+        },
+        'windows2019_ja-64' => {
+            :general => {
+                'platform'           => 'windows-2019-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2019-ja-x86_64',
+                'locale'   => 'ja'
+            }
+        },
+        'windows2019_ja-6432' => {
+            :general => {
+                'platform'           => 'windows-2019-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2019-ja-x86_64',
+                'locale'   => 'ja'
+            }
+        },
+        'windows2019_fr-64' => {
+            :general => {
+                'platform'           => 'windows-2019-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2019-fr-x86_64',
+                'user'     => 'Administrateur',
+                'locale'   => 'fr'
+            }
+        },
+        'windows2019_fr-6432' => {
+            :general => {
+                'platform'           => 'windows-2019-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2019-fr-x86_64',
+                'user'     => 'Administrateur',
+                'locale'   => 'fr'
+            }
+        },
+        'windows2019_core-64' => {
+            :general => {
+                'platform'           => 'windows-2019-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-2019-core-x86_64'
+            }
+        },
+        'windows2019_core-6432' => {
+            :general => {
+                'platform'           => 'windows-2019-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-2019-core-x86_64'
+            }
+        },
+        'windows7-64' => {
+            :general => {
+                'platform'           => 'windows-7-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-7-x86_64'
+            }
+        },
+        'windows81-64' => {
+            :general => {
+                'platform'           => 'windows-8.1-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-81-x86_64'
+            }
+        },
+        'windows10ent-32' => {
+            :general => {
+                'platform'           => 'windows-10ent-32',
+                'packaging_platform' => 'windows-2012-x86',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-10-ent-i386'
+            }
+        },
+        'windows10ent-64' => {
+            :general => {
+                'platform'           => 'windows-10ent-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-10-ent-x86_64'
+            }
+        },
+        'windows10next-32' => {
+            :general => {
+                'platform'           => 'windows-10ent-32',
+                'packaging_platform' => 'windows-2012-x86',
+                'ruby_arch' => 'x86'
+            },
+            :vmpooler => {
+                'template' => 'win-10-next-i386'
+            }
+        },
+        'windows10next-64' => {
+            :general => {
+                'platform'           => 'windows-10ent-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-10-next-x86_64'
+            }
+        },
+        'windows10pro-64' => {
+            :general => {
+                'platform'           => 'windows-10pro-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-10-pro-x86_64'
+            }
+        },
+        'windows10_1511-64' => {
+            :general => {
+                'platform'           => 'windows-10ent-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-10-1511-x86_64'
+            }
+        },
+        'windows10_1607-64' => {
+            :general => {
+                'platform'           => 'windows-10ent-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-10-1607-x86_64'
+            }
+        },
+        'windows10_1809-64' => {
+            :general => {
+                'platform'           => 'windows-10ent-64',
+                'packaging_platform' => 'windows-2012-x64',
+                'ruby_arch' => 'x64'
+            },
+            :vmpooler => {
+                'template' => 'win-10-1809-x86_64'
+            }
+        }
+    }
 end
 
 def osinfo_bhgv1
-  {
-      'centos4-32' => {
-          :general => {
-              'platform' => 'centos-4-i386'
-          },
-          :vmpooler => {
-              'template' => 'centos-4-i386'
-          }
-      },
-      'centos4-64' => {
-          :general => {
-              'platform' => 'centos-4-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'centos-4-x86_64'
-          }
-      },
-      'centos5-32' => {
-          :general => {
-              'platform' => 'centos-5-i386'
-          },
-          :vmpooler => {
-              'template' => 'centos-5-i386'
-          }
-      },
-      'centos5-64' => {
-          :general => {
-              'platform' => 'centos-5-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'centos-5-x86_64'
-          }
-      },
-      'centos6-32' => {
-          :general => {
-              'platform' => 'centos-6-i386'
-          },
-          :vmpooler => {
-              'template' => 'centos-6-i386'
-          }
-      },
-      'centos6-64' => {
-          :general => {
-              'platform' => 'centos-6-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'centos-6-x86_64'
-          }
-      },
-      'centos7-64' => {
-          :general => {
-              'platform' => 'centos-7-x86_64'
-          },
-          :vmpooler => {
-              'template' => 'centos-7-x86_64'
-          }
-      }
-  }
+    {
+        'centos4-32' => {
+            :general => {
+                'platform' => 'centos-4-i386'
+            },
+            :vmpooler => {
+                'template' => 'centos-4-i386'
+            }
+        },
+        'centos4-64' => {
+            :general => {
+                'platform' => 'centos-4-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'centos-4-x86_64'
+            }
+        },
+        'centos5-32' => {
+            :general => {
+                'platform' => 'centos-5-i386'
+            },
+            :vmpooler => {
+                'template' => 'centos-5-i386'
+            }
+        },
+        'centos5-64' => {
+            :general => {
+                'platform' => 'centos-5-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'centos-5-x86_64'
+            }
+        },
+        'centos6-32' => {
+            :general => {
+                'platform' => 'centos-6-i386'
+            },
+            :vmpooler => {
+                'template' => 'centos-6-i386'
+            }
+        },
+        'centos6-64' => {
+            :general => {
+                'platform' => 'centos-6-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'centos-6-x86_64'
+            }
+        },
+        'centos7-64' => {
+            :general => {
+                'platform' => 'centos-7-x86_64'
+            },
+            :vmpooler => {
+                'template' => 'centos-7-x86_64'
+            }
+        }
+    }
 end
 
-jenkins_platforms = 'aix61-POWERfa aix71-POWERfa aix72-POWERfa amazon6-64a amazon7-64a debian8-64a debian8-32a debian9-64a debian9-32a debian10-64a fedora28-64a fedora29-64a fedora30-64a fedora31-64a osx1012-64a osx1013-64a osx1014-64a redhat5-64a centos6-64a centos6-32a centos8-64a redhat7-64a redhat7-POWERa redhat7-AARCH64a redhat8-64a redhatfips7-64a sles11-64a sles11-32a sles12-64a sles12-POWERa sles15-64a solaris10-64a solaris11-64a solaris114-64a ubuntu1404-64a ubuntu1404-32a ubuntu1604-64a ubuntu1604-32a ubuntu1604-POWERa ubuntu1804-64a windows10ent-64a windows10ent-32a windows2008r2-64a windows2012r2-64a windows2016-64a windows2019-64a windowsfips2012r2-64a'
+jenkins_platforms = 'aix61-POWERfa aix71-POWERfa aix72-POWERfa amazon6-64a amazon7-64a debian8-64a debian8-32a debian9-64a debian9-32a debian10-64a fedora28-64a fedora29-64a fedora30-64a fedora31-64a osx1012-64a osx1013-64a osx1014-64a osx1015-64a redhat5-64a centos6-64a centos6-32a centos8-64a redhat7-64a redhat7-POWERa redhat7-AARCH64a redhat8-64a redhatfips7-64a sles11-64a sles11-32a sles12-64a sles12-POWERa sles15-64a solaris10-64a solaris11-64a solaris114-64a ubuntu1404-64a ubuntu1404-32a ubuntu1604-64a ubuntu1604-32a ubuntu1604-POWERa ubuntu1804-64a windows10ent-64a windows10ent-32a windows2008r2-64a windows2012r2-64a windows2016-64a windows2019-64a windowsfips2012r2-64a '
 
-cleaned_jenkins_platforms = jenkins_platforms.gsub('a ', ' ')
-jenkins_platforms_list = cleaned_jenkins_platforms.split()
-jenkins_platforms_list.each { |platform| platform.gsub!('f', '') if platform.start_with?('aix')}
+jenkins_platforms_list = jenkins_platforms.split('a ')
+jenkins_platforms_list.each do |platform|
+  platform.gsub!('f', '') if platform.start_with?('aix')
+end
+jenkins_platforms_list.delete('centos8-64') #it's the same with redhat8
 
 all_platforms = osinfo
 all_platforms.merge(osinfo_bhgv1)
@@ -1893,11 +1896,9 @@ nspooler_platforms = {}
 all_platforms.each do |platform, value|
   if jenkins_platforms_list.include?(platform) && value.has_key?(:abs) && !platform.start_with?('amazon')
     nspooler_platforms[platform] = value[:abs]['template']
-    elsif jenkins_platforms_list.include?(platform) && value.has_key?(:vmpooler)
+  elsif jenkins_platforms_list.include?(platform) && value.has_key?(:vmpooler)
     vmpooler_platforms << platform
   end
 end
 puts vmpooler_platforms
 puts nspooler_platforms
-
-

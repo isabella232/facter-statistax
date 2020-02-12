@@ -1,7 +1,17 @@
 # frozen_string_literal: true
 
 require 'pathname'
-require_relative '../log_performance/log_performance_times'
+require_relative '../log_performance/performance_times_logging/log_performance_times'
+
+def correct_platform_name(agent)
+  if agent['platform'].include?('aix')
+    agent.to_s.split('-')[0].sub(/aix(\d)(\d)/, 'aix-\1.\2') + '-power'
+  elsif agent.has_key?('template') && agent['template'].include?('fips')
+    agent['template']
+  else
+    agent['platform']
+  end
+end
 
 def run_statistax(agent, home_dir, is_gem)
   content = ::File.read(File.join(Pathname.new(File.expand_path('..', __dir__)), 'config.json'))
@@ -26,9 +36,10 @@ test_name 'Run facter statistax' do
   log_dir = File.join(File.expand_path('..', __dir__), "log_dir")
 
   agents.each do |agent|
-    is_gem = false
-    home_dir = on(agent, 'pwd').stdout.chop
-    host_dir = File.join(log_dir, "#{agent['platform']}")
+    is_gem        = false
+    home_dir      = on(agent, 'pwd').stdout.chop
+    platform_name = correct_platform_name(agent)
+    host_dir      = File.join(log_dir, "#{platform_name}")
 
     step 'Run facter statistax for Cfacter' do
       run_statistax(agent, home_dir, is_gem)
@@ -48,7 +59,7 @@ test_name 'Run facter statistax' do
     end
 
     step 'Copy results to Google spreadsheet' do
-      LogPerformanceTimes.new(log_dir).populate_logs_for(agent['platform'])
+      LogPerformanceTimes.new(log_dir).populate_logs_for(platform_name)
     end
   end
 end
