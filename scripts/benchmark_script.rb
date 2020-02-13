@@ -15,11 +15,11 @@ elsif Gem.win_platform?
   gems_path = 'C:/Program Files/Puppet Labs/Puppet/puppet/lib/ruby/gems'
   ruby_version = Dir.entries(gems_path).select { |file| file =~ /[0-9]+.[0-9]+.[0-9]+/ }
   facter_ng_path =  File.join(gems_path, ruby_version, 'gems')
-  facter_ng_version = Dir.entries(facter_ng_path).select { |file| file =~ /facter-ng-4/ }
-  facter_ng_path = File.join(facter_ng_path, facter_ng_version, 'lib', 'facter-ng.rb')
+  facter_ng_version = Dir.entries(facter_ng_path).select { |file| file =~ /facter-4/ }
+  facter_ng_path = File.join(facter_ng_path, facter_ng_version, 'lib', 'facter.rb')
   require facter_ng_path
 else
-  require 'facter-ng'
+  require 'facter'
 end
 
 time = Benchmark.realtime do
