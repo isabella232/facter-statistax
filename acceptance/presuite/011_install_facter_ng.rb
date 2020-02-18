@@ -3,7 +3,7 @@
 test_name 'Install facter gem' do
   agents.each do |agent|
     current_dir = Pathname.new(File.expand_path('..', __dir__))
-    facter_ng_path = Dir.entries(current_dir).select { |file| file =~ /facter-[0-9]+.[0-9]+.[0-9]+.gem/ }
+    facter_ng_path = Dir.entries(current_dir).select { |file| file =~ /facter-[0-9]+.[0-9]+.[0-9]+(.pre)?.gem/ }
     facter_gem = File.join(current_dir, facter_ng_path)
     home_dir = on(agent, 'pwd').stdout.chop
 
