@@ -3,7 +3,7 @@ require 'set'
 module OutputParser
   @error_tokens = [
       'retrying in',
-      'command not found',
+      '(?<!rpmkeys: )command not found',
       'invalidurierror',
       'timed out',
       'Failed while running the pre_suite suite',
