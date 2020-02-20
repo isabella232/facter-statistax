@@ -15,7 +15,6 @@ class Beaker
         test_sequence
       rescue FailedCommand
         destroy_environment
-        next
       end
     end
   end
