@@ -2,14 +2,14 @@
 
 module Configuration
   BEAKER_ENV_VARS = {
-      'GOOGLE_APPLICATION_CREDENTIALS' => '/Users/andrei.filipovici/projects/google-sheets/Facter Performance History-99315759f0c6.json',
+      'GOOGLE_APPLICATION_CREDENTIALS' => '/usr/app/google_sheets_credentials.json',
       'IS_GEM' => 'true'
   }
   SPREADSHEET_ID = '1giARlXsBSGhxIWRlThV8QfmybeAfaBrNRzdr9C0pvPw'
-  USER_HOME_PATH = '/Users/andrei.filipovici/'
-  FACTER_NG_PROJECT_PATH = '/Users/andrei.filipovici/projects/facter-ng-for-statistax'
-  STATISTAX_PROJECT_PATH = '/Users/andrei.filipovici/projects/facter-statistax-performance/acceptance/'
-  LOGS_FOLDER_PATH = '/Users/andrei.filipovici/projects/facter-statistax-performance/acceptance/cron_logs'
+  USER_HOME_PATH = '/usr/app/'
+  FACTER_NG_PROJECT_PATH = '/usr/app/facter-ng'
+  STATISTAX_PROJECT_PATH = '/usr/app/facter-statistax/acceptance/'
+  LOGS_FOLDER_PATH = '/usr/app/cron_logs'
   RUN_FAILS_LOG_NAME = '_run_failures'
   SCRIPT_ERRORS_LOG_NAME = '_script_failures'
   PRE_TESTS_LOG_NAME = '_all'
