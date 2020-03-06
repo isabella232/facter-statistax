@@ -1,1 +1,0 @@
-gem build ../../facter-ng/facter-ng.gemspec
