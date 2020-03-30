@@ -65,7 +65,6 @@ class TestAllPlatforms
   end
 
   def update_facter_ng_master
-    log_run_command('git checkout master')
     log_run_command('git fetch --all')
     log_run_command('git reset --hard origin/master')
   end
