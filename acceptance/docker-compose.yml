@@ -5,6 +5,4 @@ services:
     image: perf
     volumes:
       - "<abs path to cron_logs>:/usr/app/cron_logs"
-      - "<abs path to facter-statistax log folder>:/usr/app/facter-statistax/acceptance/log"
-      - "<abs path to facter-statistax log_dir folder>:/usr/app/facter-statistax/acceptance/log_dir"
-      - "<abs path to facter-statistax log_performance folder>:/usr/app/facter-statistax/acceptance/log_performance"
+      - "<abs path to facter-statistax acceptance folder>:/usr/app/facter-statistax/acceptance"
