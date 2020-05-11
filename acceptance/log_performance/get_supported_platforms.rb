@@ -431,7 +431,7 @@ def osinfo
                 'docker_image_commands' => [
                     'cp /bin/true /sbin/agetty',
                     'rm -f /usr/sbin/policy-rc.d',
-                    'apt-get update && apt-get install -y cron locales-all net-tools wget'
+                    'apt-get update && apt-get install -y cron locales-all net-tools wget apt-transport-https'
                 ]
             },
             :vagrant => {
@@ -453,7 +453,7 @@ def osinfo
                 'docker_image_commands' => [
                     'cp /bin/true /sbin/agetty',
                     'rm -f /usr/sbin/policy-rc.d',
-                    'apt-get update && apt-get install -y cron locales-all net-tools wget'
+                    'apt-get update && apt-get install -y cron locales-all net-tools wget apt-transport-https'
                 ]
             }
         },
@@ -466,7 +466,7 @@ def osinfo
                 'docker_image_commands' => [
                     'cp /bin/true /sbin/agetty',
                     'rm -f /usr/sbin/policy-rc.d',
-                    'apt-get update && apt-get install -y cron locales-all net-tools wget systemd-sysv gnupg'
+                    'apt-get update && apt-get install -y cron locales-all net-tools wget systemd-sysv gnupg apt-transport-https'
                 ]
             },
             :vagrant => {
@@ -487,6 +487,9 @@ def osinfo
                     'rm -f /usr/sbin/policy-rc.d',
                     'apt-get update && apt-get install -y cron locales-all net-tools wget gnupg'
                 ]
+            },
+            :vagrant => {
+                'box' => 'debian/buster64',
             },
             :vmpooler => {
                 'template' => 'debian-10-x86_64'
@@ -1345,6 +1348,23 @@ def osinfo
                 'template' => 'ubuntu-1810-x86_64'
             }
         },
+        'ubuntu2004-64' => {
+            :general => {
+                'platform'           => 'ubuntu-20.04-amd64',
+                'packaging_platform' => 'ubuntu-20.04-amd64'
+            },
+            :docker => {
+                'docker_image_commands' => [
+                    'cp /bin/true /sbin/agetty',
+                    'apt-get install -y net-tools wget locales apt-transport-https iproute2 gnupg',
+                    'locale-gen en_US.UTF-8',
+                    'echo LANG=en_US.UTF-8 > /etc/default/locale'
+                ]
+            },
+            :vmpooler => {
+                'template' => 'ubuntu-2004-x86_64'
+            }
+        },
         'vro6-64' => {
             :general => {
                 'platform'           => 'sles-11-x86_64',
@@ -1880,7 +1900,7 @@ def osinfo_bhgv1
     }
 end
 
-jenkins_platforms = 'aix61-POWERfa aix71-POWERfa aix72-POWERfa amazon6-64a amazon7-64a debian8-64a debian8-32a debian9-64a debian9-32a debian10-64a fedora28-64a fedora29-64a fedora30-64a fedora31-64a osx1012-64a osx1013-64a osx1014-64a osx1015-64a redhat5-64a centos6-64a centos6-32a centos8-64a redhat7-64a redhat7-POWERa redhat7-AARCH64a redhat8-64a redhatfips7-64a sles11-64a sles11-32a sles12-64a sles12-POWERa sles15-64a solaris10-64a solaris11-64a solaris114-64a ubuntu1404-64a ubuntu1404-32a ubuntu1604-64a ubuntu1604-32a ubuntu1604-POWERa ubuntu1804-64a windows10ent-64a windows10ent-32a windows2008r2-64a windows2012r2-64a windows2016-64a windows2019-64a windowsfips2012r2-64a '
+jenkins_platforms = 'aix61-POWERfa aix71-POWERfa aix72-POWERfa amazon6-64a amazon7-64a debian8-64a debian8-32a debian9-64a debian9-32a debian10-64a fedora30-64a fedora31-64a osx1014-64a osx1015-64a redhat5-64a centos6-64a centos6-32a centos8-64a redhat7-64a redhat7-POWERa redhat7-AARCH64a redhat8-64a redhatfips7-64a sles11-64a sles11-32a sles12-64a sles12-POWERa sles15-64a solaris10-64a solaris11-64a solaris114-64a ubuntu1404-64a ubuntu1404-32a ubuntu1604-64a ubuntu1604-32a ubuntu1604-POWERa ubuntu1804-64a ubuntu2004-64a windows10ent-64a windows10ent-32a windows2008r2-64a windows2012r2-64a windows2019_ja-64a%7Blocale=ja%7D windows2016-64a windows2019-64a windowsfips2012r2-64a '
 
 jenkins_platforms_list = jenkins_platforms.split('a ')
 jenkins_platforms_list.each do |platform|
