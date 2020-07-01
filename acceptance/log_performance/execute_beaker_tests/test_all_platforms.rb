@@ -66,7 +66,7 @@ class TestAllPlatforms
 
   def update_facter_ng_master
     log_run_command('git fetch --all')
-    log_run_command('git reset --hard origin/master')
+    log_run_command('git reset --hard origin/4.x')
   end
 
   def run_tests_on_vms
