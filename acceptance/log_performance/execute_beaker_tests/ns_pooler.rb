@@ -44,6 +44,8 @@ class NSPooler < Beaker
   def make_request_for_vm(platform_template)
     get_vm_response = log_run_command("curl --fail --silent --show-error -H X-AUTH-TOKEN:VmPoolerAuthToken -X POST -d '{\"#{platform_template}\":1}' --url https://nspooler-service-prod-1.delivery.puppetlabs.net/api/v1/host/")
     JSON.parse(get_vm_response.gsub('=>', ':'))
+  rescue
+    return { 'ok': false }
   end
 
   def get_beaker_platform_name(platform, nsPooler_host_name)

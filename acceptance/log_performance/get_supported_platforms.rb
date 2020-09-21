@@ -1900,7 +1900,7 @@ def osinfo_bhgv1
     }
 end
 
-jenkins_platforms = 'aix61-POWERfa aix71-POWERfa aix72-POWERfa amazon6-64a amazon7-64a debian8-64a debian8-32a debian9-64a debian9-32a debian10-64a fedora30-64a fedora31-64a osx1014-64a osx1015-64a redhat5-64a centos6-64a centos6-32a centos8-64a redhat7-64a redhat7-POWERa redhat7-AARCH64a redhat8-64a redhatfips7-64a sles11-64a sles11-32a sles12-64a sles12-POWERa sles15-64a solaris10-64a solaris11-64a solaris114-64a ubuntu1404-64a ubuntu1404-32a ubuntu1604-64a ubuntu1604-32a ubuntu1604-POWERa ubuntu1804-64a ubuntu2004-64a windows10ent-64a windows10ent-32a windows2008r2-64a windows2012r2-64a windows2019_ja-64a%7Blocale=ja%7D windows2016-64a windows2019-64a windowsfips2012r2-64a '
+jenkins_platforms = 'aix61-POWERfa aix71-POWERfa aix72-POWERfa amazon6-64a amazon7-64a debian9-64a debian9-32a debian10-64a fedora30-64a fedora31-64a fedora32-64a osx1014-64a osx1015-64a centos6-64a centos6-32a centos8-64a redhat7-64a redhat7-AARCH64a redhat8-64a redhat8-AARCH64a redhatfips7-64a sles12-64a sles15-64a solaris11-64a solaris11-SPARCa solaris114-64a ubuntu1604-64a ubuntu1604-32a ubuntu1804-64a ubuntu2004-64a windows10ent-64a windows10ent-32a windows2012r2-64a windows2019_ja-64a%7Blocale=ja%7D windows2016-64a windows2019-64a windowsfips2012r2-64a'
 
 jenkins_platforms_list = jenkins_platforms.split('a ')
 jenkins_platforms_list.each do |platform|
