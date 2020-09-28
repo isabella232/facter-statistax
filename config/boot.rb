@@ -14,7 +14,7 @@ CONFIG_FILE   = ARGV[0] || ''
 IS_GEM        = ARGV[1] || 'false'
 
 def load_files(*dirs)
-  dirs.each { |dir| Dir[ROOT_DIR.join(dir)].each { |file| require file } }
+  dirs.each { |dir| Dir[ROOT_DIR.join(dir)].sort.each { |file| require file } }
 end
 
 load_files(
