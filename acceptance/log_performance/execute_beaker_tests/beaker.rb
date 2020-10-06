@@ -55,7 +55,7 @@ class Beaker
   end
 
   def run_statistax_tests
-    log_run_command('bundle exec beaker exec run/run_statistax.rb', 15)
+    log_run_command('bundle exec beaker exec run/run_statistax.rb', 25)
   end
 
   def destroy_environment

@@ -39,6 +39,11 @@ class GoogleSheets
     response.values.nil? ? [[]] : response.values
   end
 
+  def get_rows_from_page_with_string_range(page_name, string_range)
+    response = @service.get_spreadsheet_values(@spreadsheet_id, "#{page_name}!#{string_range}")
+    response.values.nil? ? [[]] : response.values
+  end
+
   def write_to_page(rows_list, page_name, range)
     value_range = Google::Apis::SheetsV4::ValueRange.new(values: rows_list)
     result = @service.append_spreadsheet_value(@spreadsheet_id,

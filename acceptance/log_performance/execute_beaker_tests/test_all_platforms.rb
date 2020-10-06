@@ -40,8 +40,16 @@ class TestAllPlatforms
 
   def prepare_environment
     FileFolderUtils.create_directories(@logs_folder)
+    clean_workspace
     Configuration::BEAKER_ENV_VARS['SHA'] = get_latest_agent_sha
     get_latest_facter_ng_gem
+  end
+
+  def clean_workspace
+    Dir.chdir(Configuration::STATISTAX_PROJECT_PATH) do
+      log_run_command('rm *.gem')
+      log_run_command('rm puppet-agent*')
+    end
   end
 
   def get_latest_agent_sha
